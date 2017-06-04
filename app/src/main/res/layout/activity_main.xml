@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="25dp"
+    tools:context="saleh.ma.mostafa.gmail.com.editcreditdemo.MainActivity">
+
+    <saleh.ma.mostafa.gmail.com.editcredit.EditCredit
+        android:id="@+id/editcredit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:textColor="@color/colorAccent"
+        android:text="@string/separators_label"/>
+
+    <RadioGroup
+        android:id="@+id/rg_options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:checkedButton="@+id/rb_no_separators">
+
+        <RadioButton
+            android:id="@+id/rb_no_separators"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_separators"/>
+
+        <RadioButton
+            android:id="@+id/rb_spaces"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/spaces"/>
+
+        <RadioButton
+            android:id="@+id/rb_dashes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dashes"/>
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btn_validate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="@string/validate_card_number"/>
+
+    <Button
+        android:id="@+id/btn_get_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="@string/get_number_without_separators" />
+
+</LinearLayout>

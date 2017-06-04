@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="EditCredit">
+        <attr name="separator" format="enum">
+            <enum name="no_separator" value="0"/>
+            <enum name="spaces" value="1"/>
+            <enum name="dashes" value="2"/>
+        </attr>
+    </declare-styleable>
+</resources>

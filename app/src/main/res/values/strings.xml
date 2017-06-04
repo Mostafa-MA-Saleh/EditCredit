@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">EditCredit Demo</string>
+    <string name="separators_label">Separators:</string>
+    <string name="no_separators">No Separators</string>
+    <string name="spaces">Spaces</string>
+    <string name="dashes">Dashes</string>
+    <string name="validate_card_number">Validate Card Number</string>
+    <string name="get_number_without_separators">Get number without separators</string>
+</resources>
