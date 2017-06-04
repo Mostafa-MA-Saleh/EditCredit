@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 
-    package="saleh.ma.mostafa.gmail.com.editcredit">
+    package="mostafa.ma.saleh.gmail.com.editcredit">
 
     <application
         android:allowBackup="true"

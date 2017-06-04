@@ -6,9 +6,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="25dp"
-    tools:context="saleh.ma.mostafa.gmail.com.editcreditdemo.MainActivity">
+    tools:context="mostafa.ma.saleh.gmail.com.editcreditdemo.MainActivity">
 
-    <saleh.ma.mostafa.gmail.com.editcredit.EditCredit
+    <mostafa.ma.saleh.gmail.com.editcredit.EditCredit
         android:id="@+id/editcredit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
