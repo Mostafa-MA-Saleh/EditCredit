@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="25dp"
+    android:padding="16dp"
     tools:context="mostafa.ma.saleh.gmail.com.editcreditdemo.MainActivity">
 
     <mostafa.ma.saleh.gmail.com.editcredit.EditCredit
@@ -14,39 +14,74 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:textColor="@color/colorAccent"
-        android:text="@string/separators_label"/>
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_weight="0.5"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/colorAccent"
+                android:text="@string/separators_label"/>
 
-    <RadioGroup
-        android:id="@+id/rg_options"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:checkedButton="@+id/rb_no_separators">
+            <RadioGroup
+                android:id="@+id/rg_options"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:checkedButton="@+id/rb_no_separators">
 
-        <RadioButton
-            android:id="@+id/rb_no_separators"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/no_separators"/>
+                <RadioButton
+                    android:id="@+id/rb_no_separators"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no_separators"/>
 
-        <RadioButton
-            android:id="@+id/rb_spaces"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/spaces"/>
+                <RadioButton
+                    android:id="@+id/rb_spaces"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/spaces"/>
 
-        <RadioButton
-            android:id="@+id/rb_dashes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/dashes"/>
+                <RadioButton
+                    android:id="@+id/rb_dashes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dashes"/>
+            </RadioGroup>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_weight="0.5"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/colorAccent"
+                android:text="@string/disabled_cards_label"/>
 
-    </RadioGroup>
+            <CheckBox
+                android:id="@+id/chk_visa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/visa"/>
+
+            <CheckBox
+                android:id="@+id/chk_mastercard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mastercard"/>
+
+            <CheckBox
+                android:id="@+id/chk_amex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/american_express"/>
+        </LinearLayout>
+    </TableRow>
 
     <Button
         android:id="@+id/btn_validate"

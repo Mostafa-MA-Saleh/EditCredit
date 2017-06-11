@@ -6,4 +6,8 @@
     <string name="dashes">Dashes</string>
     <string name="validate_card_number">Validate Card Number</string>
     <string name="get_number_without_separators">Get number without separators</string>
+    <string name="disabled_cards_label">Disabled Cards:</string>
+    <string name="visa">Visa</string>
+    <string name="mastercard">MasterCard</string>
+    <string name="american_express">American Express</string>
 </resources>

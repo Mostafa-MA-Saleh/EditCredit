@@ -6,5 +6,11 @@
             <enum name="spaces" value="1"/>
             <enum name="dashes" value="2"/>
         </attr>
+        <attr name="disabledCards">
+            <flag name="none" value="0"/>
+            <flag name="visa" value="1"/>
+            <flag name="mastercard" value="2"/>
+            <flag name="amex" value="4"/>
+        </attr>
     </declare-styleable>
 </resources>

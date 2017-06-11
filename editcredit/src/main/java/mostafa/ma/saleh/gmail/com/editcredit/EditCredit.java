@@ -22,10 +22,14 @@ public class EditCredit extends AppCompatEditText {
     public static final int SPACES_SEPARATOR = 1;
     public static final int DASHES_SEPARATOR = 2;
 
+    public static final int NONE = 0;
+    public static final int VISA = 1;
+    public static final int MASTERCARD = 2;
+    public static final int AMEX = 4;
+
     private SparseArray<Pattern> mCCPatterns = null;
 
     private @Nullable String mSeparator;
-
     private boolean isValidCard;
 
     private int mCurrentDrawableResId = 0;
@@ -50,9 +54,7 @@ public class EditCredit extends AppCompatEditText {
 
     private void init() {
         if (mCCPatterns == null) {
-            mCCPatterns = new SparseArray<>();
-            mCCPatterns.put(R.drawable.visa, Pattern.compile("^4[0-9]{1,12}(?:[0-9]{6})?$"));
-            mCCPatterns.put(R.drawable.mastercard, Pattern.compile("^5[1-5][0-9]{0,14}$"));
+            setDisabledCards(NONE);
         }
         setInputType(InputType.TYPE_CLASS_PHONE);
         setSeparator(NO_SEPARATOR);
@@ -65,6 +67,7 @@ public class EditCredit extends AppCompatEditText {
                 0, 0);
         try {
             setSeparator(a.getInt(R.styleable.EditCredit_separator, NO_SEPARATOR));
+            setDisabledCards(a.getInt(R.styleable.EditCredit_disabledCards, NONE));
         } finally {
             a.recycle();
         }
@@ -172,6 +175,24 @@ public class EditCredit extends AppCompatEditText {
             setKeyListener(DigitsKeyListener.getInstance("0123456789"));
             removeSeparators();
         }
+    }
+
+    public void setDisabledCards(int disabledCards){
+        mCCPatterns = new SparseArray<>();
+        if (!containsFlag(disabledCards, VISA)){
+            mCCPatterns.put(R.drawable.visa, Pattern.compile("^4[0-9]{1,12}(?:[0-9]{6})?$"));
+        }
+        if (!containsFlag(disabledCards, MASTERCARD)) {
+            mCCPatterns.put(R.drawable.mastercard, Pattern.compile("^5[1-5][0-9]{0,14}$"));
+        }
+        if (!containsFlag(disabledCards, AMEX)){
+            mCCPatterns.put(R.drawable.amex, Pattern.compile("^3[47][0-9]{0,13}$"));
+        }
+        onTextChanged("",0,0,0);
+    }
+
+    private boolean containsFlag(int flagSet, int flag){
+        return (flagSet|flag) == flagSet;
     }
 
     public boolean isCardValid() {

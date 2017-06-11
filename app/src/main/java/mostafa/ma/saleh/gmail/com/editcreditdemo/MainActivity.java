@@ -5,17 +5,22 @@ import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import mostafa.ma.saleh.gmail.com.editcredit.EditCredit;
 
-public class MainActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener, CheckBox.OnCheckedChangeListener {
 
     private EditCredit mEditCredit;
     private RadioGroup rgOptions;
     private Button btnValidate;
     private Button btnGetNumber;
+    private CheckBox chkVisa;
+    private CheckBox chkMasterCard;
+    private CheckBox chkAMEX;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +34,9 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         rgOptions.setOnCheckedChangeListener(this);
         btnValidate.setOnClickListener(this);
         btnGetNumber.setOnClickListener(this);
+        chkVisa.setOnCheckedChangeListener(this);
+        chkMasterCard.setOnCheckedChangeListener(this);
+        chkAMEX.setOnCheckedChangeListener(this);
     }
 
     private void findViewsById(){
@@ -36,6 +44,9 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         rgOptions = (RadioGroup) findViewById(R.id.rg_options);
         btnValidate = (Button) findViewById(R.id.btn_validate);
         btnGetNumber = (Button) findViewById(R.id.btn_get_number);
+        chkVisa = (CheckBox) findViewById(R.id.chk_visa);
+        chkMasterCard = (CheckBox) findViewById(R.id.chk_mastercard);
+        chkAMEX = (CheckBox) findViewById(R.id.chk_amex);
     }
 
     @Override
@@ -54,6 +65,21 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     }
 
     @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        int disabledCards = EditCredit.NONE;
+        if(chkVisa.isChecked()){
+            disabledCards |= EditCredit.VISA;
+        }
+        if(chkMasterCard.isChecked()){
+            disabledCards |= EditCredit.MASTERCARD;
+        }
+        if (chkAMEX.isChecked()){
+            disabledCards |= EditCredit.AMEX;
+        }
+        mEditCredit.setDisabledCards(disabledCards);
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_validate:
@@ -64,4 +90,6 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
                 break;
         }
     }
+
+
 }
