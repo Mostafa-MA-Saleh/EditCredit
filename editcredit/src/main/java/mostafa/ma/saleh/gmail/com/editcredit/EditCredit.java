@@ -102,7 +102,7 @@ public class EditCredit extends AppCompatEditText {
         try {
             setSeparator(Separator.values()[a.getInt(R.styleable.EditCredit_separator, Separator.NONE.ordinal())]);
             setDisabledCardsInternal(a.getInt(R.styleable.EditCredit_disabledCards, 0));
-            setDrawableGravity(Gravity.values()[a.getInt(R.styleable.EditCredit_iconGravity, Gravity.END.ordinal())]);
+            setDrawableGravity(Gravity.values()[a.getInt(R.styleable.EditCredit_drawableGravity, Gravity.END.ordinal())]);
         } finally {
             a.recycle();
         }
