@@ -60,8 +60,8 @@ dependencies {
 | String | getTextWithoutSeparator()<br/>Returns the card number without the separators. |
 | boolean | isCardValid()<br/>Validates the entered card number. |
 | void | ~~setSeparator(int)~~<br/>Sets the separator style. This method has been depracted, use setSeparator(Separator) instead |
-| void | ~~setDisabledCards(int)~~<br/>Sets the disabled cards. This method has been depracted, use setDisabledCards(Card...) instead |
 | void | setSeparator(Separator)<br/>Sets the separator style. |
+| void | ~~setDisabledCards(int)~~<br/>Sets the disabled cards. This method has been depracted, use setDisabledCards(Card...) instead |
 | void | setDisabledCards(Card...)<br/>Sets the disabled cards. |
 | void | setDrawableGravity(Gravity)<br/>Sets the location of the card drawable. |
 
