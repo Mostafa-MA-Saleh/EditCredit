@@ -2,15 +2,21 @@
 <resources>
     <declare-styleable name="EditCredit">
         <attr name="separator" format="enum">
-            <enum name="no_separator" value="0"/>
-            <enum name="spaces" value="1"/>
-            <enum name="dashes" value="2"/>
+            <enum name="no_separator" value="0" />
+            <enum name="spaces" value="1" />
+            <enum name="dashes" value="2" />
         </attr>
         <attr name="disabledCards">
-            <flag name="none" value="0"/>
-            <flag name="visa" value="1"/>
-            <flag name="mastercard" value="2"/>
-            <flag name="amex" value="4"/>
+            <flag name="none" value="0" />
+            <flag name="visa" value="1" />
+            <flag name="mastercard" value="2" />
+            <flag name="amex" value="4" />
+        </attr>
+        <attr name="drawableGravity">
+            <enum name="start" value="0" />
+            <enum name="end" value="1" />
+            <enum name="left" value="2" />
+            <enum name="right" value="3" />
         </attr>
     </declare-styleable>
 </resources>
