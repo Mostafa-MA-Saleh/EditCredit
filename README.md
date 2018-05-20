@@ -1,10 +1,10 @@
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-EditCredit-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/5859)
-[![JitPack](https://img.shields.io/badge/JitPack-1.5.0-blue.svg?style=flat)](https://jitpack.io/#Mostafa-MA-Saleh/EditCredit/1.5.0)
+[![JitPack](https://img.shields.io/badge/JitPack-1.6.0-blue.svg?style=flat)](https://jitpack.io/#Mostafa-MA-Saleh/EditCredit/1.5.0)
 # EditCredit
 Custom EditText for entering Credit Card numbers, this EditText will also 
 display the image of the card number type being entered (after entering the second digit).
 And supports adding a separator (spaces or dashes) after every four digits.
-<br/>This version (1.5.0) supports Visa, MasterCard and American Express cards, but more will be added soon.
+<br/>This version (1.6.0) supports Visa, MasterCard and American Express cards, but more will be added soon.
 
 ## Installation via Gradle:
 
@@ -22,11 +22,17 @@ allprojects {
 ```gradle
 dependencies {
   ...
-  compile 'com.github.Mostafa-MA-Saleh:EditCredit:1.5.0'
+  compile 'com.github.Mostafa-MA-Saleh:EditCredit:1.6.0'
 }
 ```
 
 ## Changelog
+### v 1.6.0
+- Updated the demo app to include the gravity options.
+- Added the ability to change the drawable gravity.
+- Deprecated setSeparator(int) and replaced it with setSeparator(Separator).
+- Deprecated setDisabledCards(int) and replaced it with setDisabledCards(Card...).
+- The minSDK is now 14 (because of AppCompat).
 ### v 1.5.0
 - Added support for American Express.
 - Added the ability to disable cards.
@@ -43,20 +49,9 @@ dependencies {
 
 | Name | Description | values |
 |:---|:---|:---|
-| app:separator | Sets the separator style | no_separator<br/>spaces<br/>dashes |
-| app:disabledCards | Sets disabled cards<br/>this can be multiple values seperated by "\|"<br/>(eg. app:disabledCards="visa\|amex") | none<br/>visa<br/>mastercard<br/>amex |
-
-### Constants
-
-| type | Name |
-|:---|:---|
-| int | NO_SEPARATOR |
-| int | SPACES_SEPARATOR |
-| int | DASHES_SEPARATOR |
-| int | NONE |
-| int | VISA |
-| int | MASTERCARD |
-| int | AMEX |
+| separator | Sets the separator style | no_separator<br/>spaces<br/>dashes |
+| drawableGravity | Sets the the location of the card drawable | start<br/>end<br/>left<br/>right |
+| disabledCards | Sets disabled cards<br/>this can be multiple values seperated by "\|"<br/>(eg. app:disabledCards="visa\|amex") | none<br/>visa<br/>mastercard<br/>amex |
 
 ### Public Methods
 
@@ -64,8 +59,11 @@ dependencies {
 |:---|:---|
 | String | getTextWithoutSeparator()<br/>Returns the card number without the separators. |
 | boolean | isCardValid()<br/>Validates the entered card number. |
-| void | setSeparator(int separator)<br/>Sets the separator style. Should be NO_SEPARATOR, SPACES_SEPARATOR or DASHES_SEPARATOR. |
-| void | setDisabledCards(int disabledCards)<br/>Sets the disabled cards. Should be NONE, VISA, MASTERCARD or AMEX.<br/>If you want to disable more than one type of card add "\|" between each one.<br/>(eg. setDisabledCards(EditCredit.VISA\|EditCredit.AMEX);) |
+| void | ~~setSeparator(int)~~<br/>Sets the separator style. This method has been depracted, use setSeparator(Separator) instead |
+| void | ~~setDisabledCards(int)~~<br/>Sets the disabled cards. This method has been depracted, use setDisabledCards(Card...) instead |
+| void | setSeparator(Separator)<br/>Sets the separator style. |
+| void | setDisabledCards(Card...)<br/>Sets the disabled cards. |
+| void | setDrawableGravity(Gravity)<br/>Sets the location of the card drawable. |
 
 
 ## Usage
@@ -76,6 +74,7 @@ EditCredit can be used just like a normal EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:disabledCards="visa|amex"
+        app:drawableGravity="end"
         app:separator="spaces" />
 ```
 
