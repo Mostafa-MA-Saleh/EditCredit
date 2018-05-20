@@ -1,10 +1,10 @@
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-EditCredit-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/5859)
-[![JitPack](https://img.shields.io/badge/JitPack-1.6.0-blue.svg?style=flat)](https://jitpack.io/#Mostafa-MA-Saleh/EditCredit/1.5.0)
+[![JitPack](https://img.shields.io/badge/JitPack-1.6.1-blue.svg?style=flat)](https://jitpack.io/#Mostafa-MA-Saleh/EditCredit/1.6.1)
 # EditCredit
 Custom EditText for entering Credit Card numbers, this EditText will also 
 display the image of the card number type being entered (after entering the second digit).
 And supports adding a separator (spaces or dashes) after every four digits.
-<br/>This version (1.6.0) supports Visa, MasterCard and American Express cards, but more will be added soon.
+<br/>This version supports Visa, MasterCard and American Express cards, but more will be added soon.
 
 ## Installation via Gradle:
 
@@ -22,12 +22,12 @@ allprojects {
 ```gradle
 dependencies {
   ...
-  compile 'com.github.Mostafa-MA-Saleh:EditCredit:1.6.0'
+  compile 'com.github.Mostafa-MA-Saleh:EditCredit:1.6.1'
 }
 ```
 
 ## Changelog
-### v 1.6.0
+### v 1.6.1
 - Updated the demo app to include the gravity options.
 - Added the ability to change the drawable gravity.
 - Deprecated setSeparator(int) and replaced it with setSeparator(Separator).
