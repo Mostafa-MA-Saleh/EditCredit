@@ -10,4 +10,9 @@
     <string name="visa">Visa</string>
     <string name="mastercard">MasterCard</string>
     <string name="american_express">American Express</string>
+    <string name="gravity_label">Gravity:</string>
+    <string name="start">Start</string>
+    <string name="end">End</string>
+    <string name="left">Left</string>
+    <string name="right">Right</string>
 </resources>

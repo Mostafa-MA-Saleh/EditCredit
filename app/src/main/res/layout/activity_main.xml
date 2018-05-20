@@ -1,100 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:padding="16dp"
     tools:context="mostafa.ma.saleh.gmail.com.editcreditdemo.MainActivity">
 
-    <mostafa.ma.saleh.gmail.com.editcredit.EditCredit
-        android:id="@+id/editcredit"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"/>
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:layout_weight="0.5"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:textColor="@color/colorAccent"
-                android:text="@string/separators_label"/>
+        <mostafa.ma.saleh.gmail.com.editcredit.EditCredit
+            android:id="@+id/editcredit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp" />
 
-            <RadioGroup
-                android:id="@+id/rg_options"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:checkedButton="@+id/rb_no_separators">
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-                <RadioButton
-                    android:id="@+id/rb_no_separators"
+            <LinearLayout
+                android:layout_weight="0.5"
+                android:orientation="vertical">
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/no_separators"/>
+                    android:layout_marginBottom="5dp"
+                    android:text="@string/separators_label"
+                    android:textColor="@color/colorAccent" />
 
-                <RadioButton
-                    android:id="@+id/rb_spaces"
+                <RadioGroup
+                    android:id="@+id/separators_radio_group"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/spaces"/>
+                    android:layout_marginBottom="10dp"
+                    android:checkedButton="@+id/no_separators_radio_button">
 
-                <RadioButton
-                    android:id="@+id/rb_dashes"
+                    <RadioButton
+                        android:id="@+id/no_separators_radio_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/no_separators" />
+
+                    <RadioButton
+                        android:id="@+id/spaces_radio_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/spaces" />
+
+                    <RadioButton
+                        android:id="@+id/dashes_radio_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/dashes" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_weight="0.5"
+                android:orientation="vertical">
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/dashes"/>
-            </RadioGroup>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_weight="0.5"
-            android:orientation="vertical">
-            <TextView
+                    android:layout_marginBottom="5dp"
+                    android:text="@string/disabled_cards_label"
+                    android:textColor="@color/colorAccent" />
+
+                <CheckBox
+                    android:id="@+id/chk_visa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/visa" />
+
+                <CheckBox
+                    android:id="@+id/chk_mastercard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mastercard" />
+
+                <CheckBox
+                    android:id="@+id/chk_amex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/american_express" />
+            </LinearLayout>
+        </TableRow>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="@string/gravity_label"
+            android:textColor="@color/colorAccent" />
+
+        <RadioGroup
+            android:id="@+id/gravity_radio_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:checkedButton="@+id/end_radio_button">
+
+            <RadioButton
+                android:id="@+id/start_radio_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:textColor="@color/colorAccent"
-                android:text="@string/disabled_cards_label"/>
+                android:text="@string/start" />
 
-            <CheckBox
-                android:id="@+id/chk_visa"
+            <RadioButton
+                android:id="@+id/end_radio_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/visa"/>
+                android:text="@string/end" />
 
-            <CheckBox
-                android:id="@+id/chk_mastercard"
+            <RadioButton
+                android:id="@+id/left_radio_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/mastercard"/>
+                android:text="@string/left" />
 
-            <CheckBox
-                android:id="@+id/chk_amex"
+            <RadioButton
+                android:id="@+id/right_radio_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/american_express"/>
-        </LinearLayout>
-    </TableRow>
+                android:text="@string/right" />
+        </RadioGroup>
 
-    <Button
-        android:id="@+id/btn_validate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAllCaps="false"
-        android:text="@string/validate_card_number"/>
+        <Button
+            android:id="@+id/btn_validate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/validate_card_number"
+            android:textAllCaps="false" />
 
-    <Button
-        android:id="@+id/btn_get_number"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAllCaps="false"
-        android:text="@string/get_number_without_separators" />
+        <Button
+            android:id="@+id/btn_get_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/get_number_without_separators"
+            android:textAllCaps="false" />
 
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>
