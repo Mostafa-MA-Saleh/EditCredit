@@ -1,5 +1,6 @@
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-EditCredit-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6952)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-EditCredit-green.svg?style=flat)](https://android-arsenal.com/details/1/6952)
 [![JitPack](https://img.shields.io/badge/JitPack-1.6.1-blue.svg?style=flat)](https://jitpack.io/#Mostafa-MA-Saleh/EditCredit/1.6.1)
+[![Playstore](https://img.shields.io/badge/Playstore-Demo-brightgreen.svg?style=flat)](https://play.google.com/store/apps/details?id=saleh.ma.mostafa.gmail.com.editcreditdemo)
 # EditCredit
 Custom EditText for entering Credit Card numbers, this EditText will also 
 display the image of the card number type being entered (after entering the second digit).
