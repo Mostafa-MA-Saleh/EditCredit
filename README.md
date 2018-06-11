@@ -1,5 +1,5 @@
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-EditCredit-green.svg?style=flat)](https://android-arsenal.com/details/1/6952)
-[![JitPack](https://img.shields.io/badge/JitPack-1.6.2-blue.svg?style=flat)](https://jitpack.io/#Mostafa-MA-Saleh/EditCredit/1.6.1)
+[![JitPack](https://img.shields.io/badge/JitPack-1.6.3-blue.svg?style=flat)](https://jitpack.io/#Mostafa-MA-Saleh/EditCredit/1.6.1)
 [![Playstore](https://img.shields.io/badge/Playstore-Demo-brightgreen.svg?style=flat)](https://play.google.com/store/apps/details?id=saleh.ma.mostafa.gmail.com.editcreditdemo)
 # EditCredit
 Custom EditText for entering Credit Card numbers, this EditText will also 
@@ -23,13 +23,13 @@ allprojects {
 ```gradle
 dependencies {
   ...
-  compile 'com.github.Mostafa-MA-Saleh:EditCredit:1.6.2'
+  compile 'com.github.Mostafa-MA-Saleh:EditCredit:1.6.3'
 }
 ```
 
 ## Changelog
 
-### v 1.6.2
+### v 1.6.3
 - Minor bug fixes.
 ### v 1.6.1
 - Updated the demo app to include the gravity options.
