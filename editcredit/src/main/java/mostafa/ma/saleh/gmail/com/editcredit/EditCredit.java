@@ -268,7 +268,7 @@ public class EditCredit extends AppCompatEditText {
         if (containsFlag(disabledCards, Card.MASTERCARD.value)) {
             cards.add(Card.MASTERCARD);
         }
-        if (!containsFlag(disabledCards, Card.AMEX.value)) {
+        if (containsFlag(disabledCards, Card.AMEX.value)) {
             cards.add(Card.AMEX);
         }
         setDisabledCards(cards.toArray(new Card[0]));
