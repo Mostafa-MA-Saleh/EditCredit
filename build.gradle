@@ -26,7 +26,7 @@ ext {
     compileSdkVersion = 27
     supportVersion = "27.1.1"
     versionCode = 5
-    versionName = "1.6.2"
+    versionName = "1.6.3"
 }
 
 task clean(type: Delete) {
