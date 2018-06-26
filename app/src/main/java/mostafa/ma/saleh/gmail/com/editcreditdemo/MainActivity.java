@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         visaCheckBox = findViewById(R.id.chk_visa);
         masterCardCheckBox = findViewById(R.id.chk_mastercard);
         americanExpressCheckBox = findViewById(R.id.chk_amex);
+        discoverCheckBox = findViewById(R.id.chk_discover);
     }
 
     @Override
