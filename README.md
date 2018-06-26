@@ -1,12 +1,12 @@
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-EditCredit-green.svg?style=flat)](https://android-arsenal.com/details/1/6952)
-[![JitPack](https://img.shields.io/badge/JitPack-1.6.3-blue.svg?style=flat)](https://jitpack.io/#Mostafa-MA-Saleh/EditCredit/1.6.1)
+[![JitPack](https://img.shields.io/badge/JitPack-1.7.0-blue.svg?style=flat)](https://jitpack.io/#Mostafa-MA-Saleh/EditCredit/1.7.0)
 [![Playstore](https://img.shields.io/badge/Playstore-Demo-brightgreen.svg?style=flat)](https://play.google.com/store/apps/details?id=saleh.ma.mostafa.gmail.com.editcreditdemo)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/MostafaS92)
 # EditCredit
 Custom EditText for entering Credit Card numbers, this EditText will also 
 display the image of the card number type being entered (after entering the second digit).
 And supports adding a separator (spaces or dashes) after every four digits.
-<br/>This version supports Visa, MasterCard and American Express cards, but more will be added soon.
+<br/>This version supports Visa, MasterCard, American Express and Discover cards.
 
 ## Installation via Gradle:
 
@@ -24,12 +24,14 @@ allprojects {
 ```gradle
 dependencies {
   ...
-  compile 'com.github.Mostafa-MA-Saleh:EditCredit:1.6.3'
+  compile 'com.github.Mostafa-MA-Saleh:EditCredit:1.7.0'
 }
 ```
 
 ## Changelog
 
+### v 1.7.0
+- Added support for Discover cards.
 ### v 1.6.3
 - Minor bug fixes.
 ### v 1.6.1
@@ -56,7 +58,7 @@ dependencies {
 |:---|:---|:---|
 | separator | Sets the separator style | no_separator<br/>spaces<br/>dashes |
 | drawableGravity | Sets the the location of the card drawable | start<br/>end<br/>left<br/>right |
-| disabledCards | Sets disabled cards<br/>this can be multiple values seperated by "\|"<br/>(eg. app:disabledCards="visa\|amex") | none<br/>visa<br/>mastercard<br/>amex |
+| disabledCards | Sets disabled cards<br/>this can be multiple values seperated by "\|"<br/>(eg. app:disabledCards="visa\|amex") | none<br/>visa<br/>mastercard<br/>amex<br/>discover |
 
 ### Public Methods
 
