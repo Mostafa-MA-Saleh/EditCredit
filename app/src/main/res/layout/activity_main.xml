@@ -29,6 +29,45 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
+                    android:text="@string/gravity_label"
+                    android:textColor="@color/colorAccent" />
+
+                <RadioGroup
+                    android:id="@+id/gravity_radio_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:checkedButton="@+id/end_radio_button">
+
+                    <RadioButton
+                        android:id="@+id/start_radio_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/start" />
+
+                    <RadioButton
+                        android:id="@+id/end_radio_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/end" />
+
+                    <RadioButton
+                        android:id="@+id/left_radio_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/left" />
+
+                    <RadioButton
+                        android:id="@+id/right_radio_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/right" />
+                </RadioGroup>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
                     android:text="@string/separators_label"
                     android:textColor="@color/colorAccent" />
 
@@ -87,47 +126,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/american_express" />
+
+                <CheckBox
+                    android:id="@+id/chk_discover"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/discover" />
             </LinearLayout>
         </TableRow>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:text="@string/gravity_label"
-            android:textColor="@color/colorAccent" />
-
-        <RadioGroup
-            android:id="@+id/gravity_radio_group"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:checkedButton="@+id/end_radio_button">
-
-            <RadioButton
-                android:id="@+id/start_radio_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/start" />
-
-            <RadioButton
-                android:id="@+id/end_radio_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/end" />
-
-            <RadioButton
-                android:id="@+id/left_radio_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/left" />
-
-            <RadioButton
-                android:id="@+id/right_radio_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/right" />
-        </RadioGroup>
 
         <Button
             android:id="@+id/btn_validate"

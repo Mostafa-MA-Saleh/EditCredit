@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     private CheckBox visaCheckBox;
     private CheckBox masterCardCheckBox;
     private CheckBox americanExpressCheckBox;
+    private CheckBox discoverCheckBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         visaCheckBox.setOnCheckedChangeListener(this);
         masterCardCheckBox.setOnCheckedChangeListener(this);
         americanExpressCheckBox.setOnCheckedChangeListener(this);
+        discoverCheckBox.setOnCheckedChangeListener(this);
     }
 
     private void findViewsById() {
@@ -109,6 +111,9 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         }
         if (americanExpressCheckBox.isChecked()) {
             disabledCards.add(EditCredit.Card.AMEX);
+        }
+        if (discoverCheckBox.isChecked()) {
+            disabledCards.add(EditCredit.Card.DISCOVER);
         }
         mEditCredit.setDisabledCards(disabledCards.toArray(new EditCredit.Card[0]));
     }

@@ -35,7 +35,7 @@ public class EditCredit extends AppCompatEditText {
     }
 
     public enum Card {
-        VISA(1), MASTERCARD(2), AMEX(4);
+        VISA(1), MASTERCARD(2), AMEX(4), DISCOVER(8);
         private int value;
 
         Card(int value) {
@@ -58,6 +58,8 @@ public class EditCredit extends AppCompatEditText {
     public static final int MASTERCARD = 2;
     @Deprecated
     public static final int AMEX = 4;
+    @Deprecated
+    public static final int DISCOVER = 8;
 
     private SparseArray<Pattern> mCCPatterns = null;
 
@@ -271,6 +273,9 @@ public class EditCredit extends AppCompatEditText {
         if (containsFlag(disabledCards, Card.AMEX.value)) {
             cards.add(Card.AMEX);
         }
+        if (containsFlag(disabledCards, Card.DISCOVER.value)) {
+            cards.add(Card.DISCOVER);
+        }
         setDisabledCards(cards.toArray(new Card[0]));
     }
 
@@ -304,6 +309,9 @@ public class EditCredit extends AppCompatEditText {
         }
         if (!containsFlag(disabledCards, Card.AMEX.value)) {
             mCCPatterns.put(R.drawable.amex, Pattern.compile("^3[47][0-9]{0,13}$"));
+        }
+        if (!containsFlag(disabledCards, Card.DISCOVER.value)) {
+            mCCPatterns.put(R.drawable.discover, Pattern.compile("^6(?:011|5[0-9]{1,2})[0-9]{0,12}$"));
         }
         onTextChanged("", 0, 0, 0);
     }
