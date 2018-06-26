@@ -1,5 +1,5 @@
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-EditCredit-green.svg?style=flat)](https://android-arsenal.com/details/1/6952)
-[![JitPack](https://img.shields.io/badge/JitPack-1.7.0-blue.svg?style=flat)](https://jitpack.io/#Mostafa-MA-Saleh/EditCredit/1.7.0)
+[![JitPack](https://img.shields.io/badge/JitPack-1.7.1-blue.svg?style=flat)](https://jitpack.io/#Mostafa-MA-Saleh/EditCredit/1.7.1)
 [![Playstore](https://img.shields.io/badge/Playstore-Demo-brightgreen.svg?style=flat)](https://play.google.com/store/apps/details?id=saleh.ma.mostafa.gmail.com.editcreditdemo)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/MostafaS92)
 # EditCredit
@@ -24,13 +24,13 @@ allprojects {
 ```gradle
 dependencies {
   ...
-  compile 'com.github.Mostafa-MA-Saleh:EditCredit:1.7.0'
+  compile 'com.github.Mostafa-MA-Saleh:EditCredit:1.7.1'
 }
 ```
 
 ## Changelog
 
-### v 1.7.0
+### v 1.7.1
 - Added support for Discover cards.
 ### v 1.6.3
 - Minor bug fixes.
