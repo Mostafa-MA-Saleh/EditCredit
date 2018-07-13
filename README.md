@@ -3,7 +3,9 @@
 [![Playstore](https://img.shields.io/badge/Playstore-Demo-brightgreen.svg?style=flat)](https://play.google.com/store/apps/details?id=saleh.ma.mostafa.gmail.com.editcreditdemo)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/MostafaS92)
 
-![Edit Credit Logo](logo/logo_ldpi.png)<br/>
+<br/>
+
+![Edit Credit Logo](logo/logo_ldpi.png)
 
 Custom EditText for entering Credit Card numbers, this EditText will also 
 display the image of the card number type being entered (after entering the second digit).
