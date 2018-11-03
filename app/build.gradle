@@ -19,6 +19,6 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation "com.android.support:appcompat-v7:$supportVersion"
+    implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation project(':editcredit')
 }
