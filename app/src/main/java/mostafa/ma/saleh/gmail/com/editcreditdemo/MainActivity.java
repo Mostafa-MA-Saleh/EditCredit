@@ -1,8 +1,6 @@
 package mostafa.ma.saleh.gmail.com.editcreditdemo;
 
 import android.os.Bundle;
-import androidx.annotation.IdRes;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -13,6 +11,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.IdRes;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AppCompatActivity;
 import mostafa.ma.saleh.gmail.com.editcredit.EditCredit;
 
 public class MainActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener, CheckBox.OnCheckedChangeListener {
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     private RadioGroup gravityRadioGroup;
     private Button validateButton;
     private Button getNumberButton;
+    private Button getTypeButton;
     private CheckBox visaCheckBox;
     private CheckBox masterCardCheckBox;
     private CheckBox americanExpressCheckBox;
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         gravityRadioGroup.setOnCheckedChangeListener(this);
         validateButton.setOnClickListener(this);
         getNumberButton.setOnClickListener(this);
+        getTypeButton.setOnClickListener(this);
         visaCheckBox.setOnCheckedChangeListener(this);
         masterCardCheckBox.setOnCheckedChangeListener(this);
         americanExpressCheckBox.setOnCheckedChangeListener(this);
@@ -52,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         gravityRadioGroup = findViewById(R.id.gravity_radio_group);
         validateButton = findViewById(R.id.btn_validate);
         getNumberButton = findViewById(R.id.btn_get_number);
+        getTypeButton = findViewById(R.id.btn_get_type);
         visaCheckBox = findViewById(R.id.chk_visa);
         masterCardCheckBox = findViewById(R.id.chk_mastercard);
         americanExpressCheckBox = findViewById(R.id.chk_amex);
@@ -128,6 +132,32 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
             case R.id.btn_get_number:
                 Toast.makeText(this, mEditCredit.getTextWithoutSeparator(), Toast.LENGTH_SHORT).show();
                 break;
+            case R.id.btn_get_type:
+                Toast.makeText(this, getCardTypeString(mEditCredit.getCardType()), Toast.LENGTH_SHORT).show();
+                break;
         }
+    }
+
+    private String getCardTypeString(EditCredit.Card card) {
+        @StringRes
+        int stringRes;
+        switch (card) {
+            case VISA:
+                stringRes = R.string.visa;
+                break;
+            case MASTERCARD:
+                stringRes = R.string.mastercard;
+                break;
+            case AMEX:
+                stringRes = R.string.american_express;
+                break;
+            case DISCOVER:
+                stringRes = R.string.discover;
+                break;
+            default:
+                stringRes = R.string.unknown;
+                break;
+        }
+        return getString(stringRes);
     }
 }

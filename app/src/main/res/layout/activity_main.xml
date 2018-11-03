@@ -149,5 +149,12 @@
             android:text="@string/get_number_without_separators"
             android:textAllCaps="false" />
 
+        <Button
+            android:id="@+id/btn_get_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/get_type"
+            android:textAllCaps="false" />
+
     </LinearLayout>
 </ScrollView>

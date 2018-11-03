@@ -6,12 +6,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import androidx.annotation.IntRange;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-import androidx.core.widget.TextViewCompat;
-import androidx.appcompat.widget.AppCompatEditText;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -24,6 +18,14 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.IntRange;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatEditText;
+import androidx.core.content.ContextCompat;
+import androidx.core.widget.TextViewCompat;
+
 public class EditCredit extends AppCompatEditText {
 
     public enum Separator {
@@ -35,11 +37,29 @@ public class EditCredit extends AppCompatEditText {
     }
 
     public enum Card {
-        VISA(1), MASTERCARD(2), AMEX(4), DISCOVER(8);
-        private int value;
+        VISA(1, R.drawable.visa),
+        MASTERCARD(2, R.drawable.mastercard),
+        AMEX(4, R.drawable.amex),
+        DISCOVER(8, R.drawable.discover),
+        UNKNOWN(-1, R.drawable.creditcard);
 
-        Card(int value) {
+        private int value;
+        @DrawableRes
+        private int drawableRes;
+
+        Card(int value, int drawableRes) {
             this.value = value;
+            this.drawableRes = drawableRes;
+        }
+
+        @NonNull
+        static Card from(@DrawableRes int drawableRes) {
+            for (Card card : values()) {
+                if (card.drawableRes == drawableRes) {
+                    return card;
+                }
+            }
+            return UNKNOWN;
         }
     }
 
@@ -134,7 +154,7 @@ public class EditCredit extends AppCompatEditText {
         if (mDrawableResId > 0 && mDrawableResId != mCurrentDrawableResId) {
             mCurrentDrawableResId = mDrawableResId;
         } else if (mDrawableResId == 0) {
-            mCurrentDrawableResId = R.drawable.creditcard;
+            mCurrentDrawableResId = Card.UNKNOWN.drawableRes;
         }
         addDrawable();
         addSeparators();
@@ -302,16 +322,16 @@ public class EditCredit extends AppCompatEditText {
             }
         }
         if (!containsFlag(disabledCards, Card.VISA.value)) {
-            mCCPatterns.put(R.drawable.visa, Pattern.compile("^4[0-9]{1,12}(?:[0-9]{6})?$"));
+            mCCPatterns.put(Card.VISA.drawableRes, Pattern.compile("^4[0-9]{1,12}(?:[0-9]{6})?$"));
         }
         if (!containsFlag(disabledCards, Card.MASTERCARD.value)) {
-            mCCPatterns.put(R.drawable.mastercard, Pattern.compile("^5[1-5][0-9]{0,14}$"));
+            mCCPatterns.put(Card.MASTERCARD.drawableRes, Pattern.compile("^5[1-5][0-9]{0,14}$"));
         }
         if (!containsFlag(disabledCards, Card.AMEX.value)) {
-            mCCPatterns.put(R.drawable.amex, Pattern.compile("^3[47][0-9]{0,13}$"));
+            mCCPatterns.put(Card.AMEX.drawableRes, Pattern.compile("^3[47][0-9]{0,13}$"));
         }
         if (!containsFlag(disabledCards, Card.DISCOVER.value)) {
-            mCCPatterns.put(R.drawable.discover, Pattern.compile("^6(?:011|5[0-9]{1,2})[0-9]{0,12}$"));
+            mCCPatterns.put(Card.DISCOVER.drawableRes, Pattern.compile("^6(?:011|5[0-9]{1,2})[0-9]{0,12}$"));
         }
         onTextChanged("", 0, 0, 0);
     }
@@ -322,6 +342,10 @@ public class EditCredit extends AppCompatEditText {
 
     public boolean isCardValid() {
         return getTextWithoutSeparator().length() > 12 && isValidCard;
+    }
+
+    public Card getCardType() {
+        return Card.from(mCurrentDrawableResId);
     }
 
     @Override
