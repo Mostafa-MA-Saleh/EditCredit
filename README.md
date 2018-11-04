@@ -1,5 +1,5 @@
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-EditCredit-green.svg?style=flat)](https://android-arsenal.com/details/1/6952)
-[![JitPack](https://img.shields.io/badge/JitPack-1.7.1-blue.svg?style=flat)](https://jitpack.io/#Mostafa-MA-Saleh/EditCredit/1.7.1)
+[![JitPack](https://img.shields.io/badge/JitPack-2.0.0-blue.svg?style=flat)](https://jitpack.io/#Mostafa-MA-Saleh/EditCredit/1.7.1)
 [![Playstore](https://img.shields.io/badge/Playstore-Demo-brightgreen.svg?style=flat)](https://play.google.com/store/apps/details?id=saleh.ma.mostafa.gmail.com.editcreditdemo)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/MostafaS92)
 
@@ -28,12 +28,16 @@ allprojects {
 ```gradle
 dependencies {
   ...
-  compile 'com.github.Mostafa-MA-Saleh:EditCredit:1.7.1'
+  compile 'com.github.Mostafa-MA-Saleh:EditCredit:2.0.0'
 }
 ```
 
 ## Changelog
 
+### v 2.0.0
+- Added the ability to get the card type.
+- Rewrote the library in kotlin.
+- Migrated to AndroidX.
 ### v 1.7.1
 - Added support for Discover cards.
 ### v 1.6.3
@@ -68,6 +72,7 @@ dependencies {
 
 | return | Name/Description |
 |:---|:---|
+| Card | getCardType()<br/>Returns the current card type. |
 | String | getTextWithoutSeparator()<br/>Returns the card number without the separators. |
 | boolean | isCardValid()<br/>Validates the entered card number. |
 | void | ~~setSeparator(int)~~<br/>Sets the separator style. This method has been depracted, use setSeparator(Separator) instead |
