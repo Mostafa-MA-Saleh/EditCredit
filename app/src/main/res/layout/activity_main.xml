@@ -12,7 +12,7 @@
         android:padding="16dp">
 
         <mostafa.ma.saleh.gmail.com.editcredit.EditCredit
-            android:id="@+id/editcredit"
+            android:id="@+id/editCredit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp" />
@@ -33,32 +33,32 @@
                     android:textColor="@color/colorAccent" />
 
                 <RadioGroup
-                    android:id="@+id/gravity_radio_group"
+                    android:id="@+id/gravityRadioGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:checkedButton="@+id/end_radio_button">
+                    android:checkedButton="@+id/endRadioButton">
 
                     <RadioButton
-                        android:id="@+id/start_radio_button"
+                        android:id="@+id/startRadioButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/start" />
 
                     <RadioButton
-                        android:id="@+id/end_radio_button"
+                        android:id="@+id/endRadioButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/end" />
 
                     <RadioButton
-                        android:id="@+id/left_radio_button"
+                        android:id="@+id/leftRadioButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/left" />
 
                     <RadioButton
-                        android:id="@+id/right_radio_button"
+                        android:id="@+id/rightRadioButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/right" />
@@ -72,26 +72,26 @@
                     android:textColor="@color/colorAccent" />
 
                 <RadioGroup
-                    android:id="@+id/separators_radio_group"
+                    android:id="@+id/separatorsRadioGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:checkedButton="@+id/no_separators_radio_button">
+                    android:checkedButton="@+id/noSeparatorsRadioButton">
 
                     <RadioButton
-                        android:id="@+id/no_separators_radio_button"
+                        android:id="@+id/noSeparatorsRadioButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/no_separators" />
 
                     <RadioButton
-                        android:id="@+id/spaces_radio_button"
+                        android:id="@+id/spacesRadioButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/spaces" />
 
                     <RadioButton
-                        android:id="@+id/dashes_radio_button"
+                        android:id="@+id/dashesRadioButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/dashes" />
@@ -110,25 +110,25 @@
                     android:textColor="@color/colorAccent" />
 
                 <CheckBox
-                    android:id="@+id/chk_visa"
+                    android:id="@+id/visaCheckBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/visa" />
 
                 <CheckBox
-                    android:id="@+id/chk_mastercard"
+                    android:id="@+id/masterCardCheckBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/mastercard" />
 
                 <CheckBox
-                    android:id="@+id/chk_amex"
+                    android:id="@+id/americanExpressCheckBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/american_express" />
 
                 <CheckBox
-                    android:id="@+id/chk_discover"
+                    android:id="@+id/discoverCheckBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/discover" />
@@ -136,23 +136,26 @@
         </TableRow>
 
         <Button
-            android:id="@+id/btn_validate"
+            android:id="@+id/validateButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="onClick"
             android:text="@string/validate_card_number"
             android:textAllCaps="false" />
 
         <Button
-            android:id="@+id/btn_get_number"
+            android:id="@+id/getNumberButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="onClick"
             android:text="@string/get_number_without_separators"
             android:textAllCaps="false" />
 
         <Button
-            android:id="@+id/btn_get_type"
+            android:id="@+id/getTypeButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="onClick"
             android:text="@string/get_type"
             android:textAllCaps="false" />
 
