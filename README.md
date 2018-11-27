@@ -28,7 +28,7 @@ allprojects {
 ```gradle
 dependencies {
   ...
-  compile 'com.github.Mostafa-MA-Saleh:EditCredit:2.0.0'
+  implementation 'com.github.Mostafa-MA-Saleh:EditCredit:2.0.0'
 }
 ```
 
