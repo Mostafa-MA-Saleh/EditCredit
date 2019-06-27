@@ -66,8 +66,8 @@ class MainActivity : AppCompatActivity(), RadioGroup.OnCheckedChangeListener, Co
         editCredit.setDisabledCards(*disabledCards.toTypedArray())
     }
 
-    fun onClick(v: View) {
-        val message = when (v.id) {
+    fun onClick(view: View) {
+        val message = when (view.id) {
             R.id.validateButton -> if (editCredit.isCardValid) "Valid" else "Not Valid"
             R.id.getNumberButton -> editCredit.textWithoutSeparator
             R.id.getTypeButton -> getCardTypeString(editCredit.cardType)

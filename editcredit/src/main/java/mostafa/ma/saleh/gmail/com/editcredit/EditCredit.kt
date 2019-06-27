@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.TextViewCompat
 import java.util.*
 import java.util.regex.Pattern
+import kotlin.math.ceil
 
 class EditCredit @JvmOverloads constructor(context: Context,
                                            attrs: AttributeSet? = null,
@@ -133,9 +134,9 @@ class EditCredit @JvmOverloads constructor(context: Context,
         if (currentDrawable != null && TextUtils.isEmpty(error)) {
             currentDrawable = resize(currentDrawable)
             when (mDrawableGravity) {
-                EditCredit.Gravity.START -> setDrawablesRelative(start = currentDrawable)
-                EditCredit.Gravity.RIGHT -> setDrawables(right = currentDrawable)
-                EditCredit.Gravity.LEFT -> setDrawables(left = currentDrawable)
+                Gravity.START -> setDrawablesRelative(start = currentDrawable)
+                Gravity.RIGHT -> setDrawables(right = currentDrawable)
+                Gravity.LEFT -> setDrawables(left = currentDrawable)
                 else -> setDrawablesRelative(end = currentDrawable)
             }
         }
@@ -167,7 +168,7 @@ class EditCredit @JvmOverloads constructor(context: Context,
     }
 
     private fun splitString(s: String): Array<String?> {
-        val arrayLength = Math.ceil(s.length / 4.toDouble()).toInt()
+        val arrayLength = ceil(s.length / 4.toDouble()).toInt()
         val result = arrayOfNulls<String>(arrayLength)
 
         var j = 0
@@ -290,7 +291,12 @@ class EditCredit @JvmOverloads constructor(context: Context,
 
     private fun resize(image: Drawable): Drawable? {
         val imageIntrinsicHeight = image.intrinsicHeight
-        val height = measuredHeight - (paddingTop + paddingBottom)
+        val height = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+            val density = resources.displayMetrics.density
+            ((measuredHeight - (paddingTop + paddingBottom)) / density).toInt()
+        } else {
+            measuredHeight - (paddingTop + paddingBottom)
+        }
         return when {
             height <= 0 -> null
             height < imageIntrinsicHeight -> {
