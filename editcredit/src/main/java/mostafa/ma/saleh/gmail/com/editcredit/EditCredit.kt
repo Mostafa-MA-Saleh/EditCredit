@@ -5,7 +5,10 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import android.text.*
+import android.text.Editable
+import android.text.InputFilter
+import android.text.InputType
+import android.text.TextWatcher
 import android.text.method.DigitsKeyListener
 import android.util.AttributeSet
 import android.util.SparseArray
@@ -18,9 +21,11 @@ import java.util.*
 import java.util.regex.Pattern
 import kotlin.math.ceil
 
-class EditCredit @JvmOverloads constructor(context: Context,
-                                           attrs: AttributeSet? = null,
-                                           defStyleAttr: Int = androidx.appcompat.R.attr.editTextStyle) : EditText(context, attrs, defStyleAttr) {
+class EditCredit @JvmOverloads constructor(
+        context: Context,
+        attrs: AttributeSet? = null,
+        defStyleAttr: Int = androidx.appcompat.R.attr.editTextStyle
+) : EditText(context, attrs, defStyleAttr) {
 
     private var mCCPatterns = SparseArray<Pattern>()
     private var mSeparator: Separator = Separator.NONE
@@ -131,7 +136,7 @@ class EditCredit @JvmOverloads constructor(context: Context,
 
     private fun addDrawable() {
         var currentDrawable = ContextCompat.getDrawable(context, mCurrentDrawableResId)
-        if (currentDrawable != null && TextUtils.isEmpty(error)) {
+        if (currentDrawable != null && error.isNullOrEmpty()) {
             currentDrawable = resize(currentDrawable)
             when (mDrawableGravity) {
                 Gravity.START -> setDrawablesRelative(start = currentDrawable)
@@ -184,11 +189,12 @@ class EditCredit @JvmOverloads constructor(context: Context,
 
     @Deprecated("Please use the method that accepts a Separator enum instead.", ReplaceWith("this.setSeparator(Separator.)"))
     fun setSeparator(@IntRange(from = 0, to = 2) separator: Int) {
-        if (separator > 2 || separator < 0)
-            throw IllegalArgumentException("The separator has to be one of the following:" +
+        require(!(separator > 2 || separator < 0)) {
+            "The separator has to be one of the following:" +
                     "NO_SEPARATOR." +
                     "SPACES_SEPARATOR." +
-                    "DASHES_SEPARATOR.")
+                    "DASHES_SEPARATOR."
+        }
         setSeparator(Separator.values()[separator])
     }
 
@@ -289,25 +295,18 @@ class EditCredit @JvmOverloads constructor(context: Context,
         }
     }
 
-    private fun resize(image: Drawable): Drawable? {
-        val imageIntrinsicHeight = image.intrinsicHeight
-        val height = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
-            val density = resources.displayMetrics.density
-            ((measuredHeight - (paddingTop + paddingBottom)) / density).toInt()
-        } else {
-            measuredHeight - (paddingTop + paddingBottom)
-        }
-        return when {
-            height <= 0 -> null
-            height < imageIntrinsicHeight -> {
-                val b = (image as BitmapDrawable).bitmap
-                val ratio = image.getIntrinsicWidth().toFloat() / imageIntrinsicHeight.toFloat()
-                val bitmapResized = Bitmap.createScaledBitmap(b, (height * ratio).toInt(), height, false)
-                BitmapDrawable(resources, bitmapResized)
+    private fun resize(image: Drawable) =
+            when (val height = measuredHeight - (paddingTop + paddingBottom)) {
+                in 1 until image.intrinsicHeight -> {
+                    val bitmap = (image as BitmapDrawable).bitmap
+                    val ratio = image.getIntrinsicWidth().toFloat() / image.intrinsicHeight.toFloat()
+                    val resizedBitmap = Bitmap.createScaledBitmap(bitmap, (height * ratio).toInt(), height, false)
+                    resizedBitmap.density = Bitmap.DENSITY_NONE
+                    BitmapDrawable(resources, resizedBitmap)
+                }
+                in Int.MIN_VALUE..0 -> null
+                else -> image
             }
-            else -> image
-        }
-    }
 
     private fun setDrawablesRelative(start: Drawable? = null, top: Drawable? = null, end: Drawable? = null, bottom: Drawable? = null) =
             TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(this, start, top, end, bottom)

@@ -5,13 +5,13 @@ apply plugin: 'com.github.dcendents.android-maven'
 group = 'com.github.Mostafa-MA-Saleh'
 
 android {
-    compileSdkVersion project.compileSdkVersion
+    compileSdkVersion rootProject.buildVersions.compileSdk
 
     defaultConfig {
-        minSdkVersion project.minSdkVersion
-        targetSdkVersion project.targetSdkVersion
-        versionCode project.versionCode
-        versionName project.versionName
+        minSdkVersion rootProject.buildVersions.minSdk
+        targetSdkVersion rootProject.buildVersions.targetSdk
+        versionCode rootProject.buildVersions.code
+        versionName rootProject.buildVersions.name
     }
     buildTypes {
         release {
@@ -23,6 +23,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${rootProject.buildVersions.kotlin}"
 }
