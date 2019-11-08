@@ -1,5 +1,5 @@
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-EditCredit-green.svg?style=flat)](https://android-arsenal.com/details/1/6952)
-[![JitPack](https://img.shields.io/badge/JitPack-2.1.0-blue.svg?style=flat)](https://jitpack.io/#Mostafa-MA-Saleh/EditCredit/2.1.0)
+[![JitPack](https://img.shields.io/badge/JitPack-2.1.1-blue.svg?style=flat)](https://jitpack.io/#Mostafa-MA-Saleh/EditCredit/2.1.1)
 [![Playstore](https://img.shields.io/badge/Playstore-Demo-brightgreen.svg?style=flat)](https://play.google.com/store/apps/details?id=saleh.ma.mostafa.gmail.com.editcreditdemo)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/MostafaS92)
 
@@ -28,12 +28,17 @@ allprojects {
 ```gradle
 dependencies {
   ...
-  implementation 'com.github.Mostafa-MA-Saleh:EditCredit:2.1.0'
+  implementation 'com.github.Mostafa-MA-Saleh:EditCredit:2.1.1'
 }
 ```
 
 ## Changelog
-
+### v 2.1.1
+- Reduced the drawables' sizes.
+- Fixed the blurry card images on some devices.
+- Updated the target SDK.
+- Added dark mode support to the demo app.
+- Other minor enhancements.
 ### v 2.1.0
 - Fixed the card icon size on Android Pie (API 28).
 ### v 2.0.0
