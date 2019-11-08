@@ -33,7 +33,7 @@ ext {
             minSdk    : 14,
             targetSdk : 29,
             compileSdk: 29,
-            code      : 10,
-            name      : '2.1.1',
+            code      : 11,
+            name      : '2.1.2',
     ]
 }
