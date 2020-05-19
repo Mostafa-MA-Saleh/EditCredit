@@ -12,9 +12,9 @@ import android.text.TextWatcher
 import android.text.method.DigitsKeyListener
 import android.util.AttributeSet
 import android.util.SparseArray
-import android.widget.EditText
 import androidx.annotation.DrawableRes
 import androidx.annotation.IntRange
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import androidx.core.widget.TextViewCompat
 import java.util.*
@@ -25,7 +25,7 @@ class EditCredit @JvmOverloads constructor(
         context: Context,
         attrs: AttributeSet? = null,
         defStyleAttr: Int = androidx.appcompat.R.attr.editTextStyle
-) : EditText(context, attrs, defStyleAttr) {
+) : AppCompatEditText(context, attrs, defStyleAttr) {
 
     private var mCCPatterns = SparseArray<Pattern>()
     private var mSeparator: Separator = Separator.NONE
@@ -314,22 +314,29 @@ class EditCredit @JvmOverloads constructor(
     private fun setDrawables(left: Drawable? = null, top: Drawable? = null, right: Drawable? = null, bottom: Drawable? = null) =
             setCompoundDrawablesWithIntrinsicBounds(left, top, right, bottom)
 
+    @Suppress("unused")
     companion object {
         @Deprecated("This constant has been replace with an enum.", ReplaceWith("Separator.NONE"))
         const val NO_SEPARATOR = 0
+
         @Deprecated("This constant has been replace with an enum.", ReplaceWith("Separator.SPACES"))
         const val SPACES_SEPARATOR = 1
+
         @Deprecated("This constant has been replace with an enum.", ReplaceWith("Separator.DASHES"))
         const val DASHES_SEPARATOR = 2
 
         @Deprecated("This constant has been replace with an enum.", ReplaceWith("null"))
         const val NONE = 0
+
         @Deprecated("This constant has been replace with an enum.", ReplaceWith("Card.VISA"))
         const val VISA = 1
+
         @Deprecated("This constant has been replace with an enum.", ReplaceWith("Card.MASTERCARD"))
         const val MASTERCARD = 2
+
         @Deprecated("This constant has been replace with an enum.", ReplaceWith("Card.AMEX"))
         const val AMEX = 4
+
         @Deprecated("This constant has been replace with an enum.", ReplaceWith("Card.DISCOVER"))
         const val DISCOVER = 8
     }
