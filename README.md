@@ -1,5 +1,5 @@
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-EditCredit-green.svg?style=flat)](https://android-arsenal.com/details/1/6952)
-[![JitPack](https://img.shields.io/badge/JitPack-2.1.2-blue.svg?style=flat)](https://jitpack.io/#Mostafa-MA-Saleh/EditCredit/2.1.2)
+[![JitPack](https://img.shields.io/badge/JitPack-2.1.3-blue.svg?style=flat)](https://jitpack.io/#Mostafa-MA-Saleh/EditCredit/2.1.3)
 [![Playstore](https://img.shields.io/badge/Playstore-Demo-brightgreen.svg?style=flat)](https://play.google.com/store/apps/details?id=saleh.ma.mostafa.gmail.com.editcreditdemo)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/MostafaS92)
 
@@ -28,11 +28,14 @@ allprojects {
 ```gradle
 dependencies {
   ...
-  implementation 'com.github.Mostafa-MA-Saleh:EditCredit:2.1.2'
+  implementation 'com.github.Mostafa-MA-Saleh:EditCredit:2.1.3'
 }
 ```
 
 ## Changelog
+### v 2.1.3
+- Updated dependencies.
+- Minor enhancements.
 ### v 2.1.2
 - Added instant experience to the demo app.
 - Minor enhancements.
