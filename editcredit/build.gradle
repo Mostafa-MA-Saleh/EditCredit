@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'com.github.dcendents.android-maven'
 
 group = 'com.github.Mostafa-MA-Saleh'
 
@@ -10,8 +9,6 @@ android {
     defaultConfig {
         minSdkVersion rootProject.buildVersions.minSdk
         targetSdkVersion rootProject.buildVersions.targetSdk
-        versionCode rootProject.buildVersions.code
-        versionName rootProject.buildVersions.name
     }
     buildTypes {
         release {
@@ -23,6 +20,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.3.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${rootProject.buildVersions.kotlin}"
 }

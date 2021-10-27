@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/EditCredit.iml" filepath="$PROJECT_DIR$/EditCredit.iml" group="EditCredit" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="EditCredit/app" />
-      <module fileurl="file://$PROJECT_DIR$/editcredit/editcredit.iml" filepath="$PROJECT_DIR$/editcredit/editcredit.iml" group="EditCredit/editcredit" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/EditCredit.iml" filepath="$PROJECT_DIR$/.idea/modules/EditCredit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/EditCredit.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/EditCredit.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/editcredit/EditCredit.editcredit.iml" filepath="$PROJECT_DIR$/.idea/modules/editcredit/EditCredit.editcredit.iml" />
     </modules>
   </component>
 </project>

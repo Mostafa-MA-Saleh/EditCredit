@@ -1,5 +1,5 @@
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-EditCredit-green.svg?style=flat)](https://android-arsenal.com/details/1/6952)
-[![JitPack](https://img.shields.io/badge/JitPack-2.1.3-blue.svg?style=flat)](https://jitpack.io/#Mostafa-MA-Saleh/EditCredit/2.1.3)
+[![JitPack](https://img.shields.io/badge/JitPack-2.2.0-blue.svg?style=flat)](https://jitpack.io/#Mostafa-MA-Saleh/EditCredit/2.2.0)
 [![Playstore](https://img.shields.io/badge/Playstore-Demo-brightgreen.svg?style=flat)](https://play.google.com/store/apps/details?id=saleh.ma.mostafa.gmail.com.editcreditdemo)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/MostafaS92)
 
@@ -33,6 +33,11 @@ dependencies {
 ```
 
 ## Changelog
+### v 2.2.0
+- Added support for Diners Club cards.
+- Removed the deprecated methods and constants.
+- Updated dependencies.
+- Other minor improvements.
 ### v 2.1.3
 - Updated dependencies.
 - Minor enhancements.
@@ -79,7 +84,7 @@ dependencies {
 |:---|:---|:---|
 | separator | Sets the separator style | no_separator<br/>spaces<br/>dashes |
 | drawableGravity | Sets the the location of the card drawable | start<br/>end<br/>left<br/>right |
-| disabledCards | Sets disabled cards<br/>this can be multiple values seperated by "\|"<br/>(eg. app:disabledCards="visa\|amex") | none<br/>visa<br/>mastercard<br/>amex<br/>discover |
+| disabledCards | Sets disabled cards<br/>this can be multiple values seperated by "\|"<br/>(eg. app:disabledCards="visa\|amex") | none<br/>visa<br/>mastercard<br/>amex<br/>discover<br/>diners |
 
 ### Public Methods
 
@@ -88,9 +93,7 @@ dependencies {
 | Card | getCardType()<br/>Returns the current card type. |
 | String | getTextWithoutSeparator()<br/>Returns the card number without the separators. |
 | boolean | isCardValid()<br/>Validates the entered card number. |
-| void | ~~setSeparator(int)~~<br/>Sets the separator style. This method has been depracted, use setSeparator(Separator) instead |
 | void | setSeparator(Separator)<br/>Sets the separator style. |
-| void | ~~setDisabledCards(int)~~<br/>Sets the disabled cards. This method has been depracted, use setDisabledCards(Card...) instead |
 | void | setDisabledCards(Card...)<br/>Sets the disabled cards. |
 | void | setDrawableGravity(Gravity)<br/>Sets the location of the card drawable. |
 

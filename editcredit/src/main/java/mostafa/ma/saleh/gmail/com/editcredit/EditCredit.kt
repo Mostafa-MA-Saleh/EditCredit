@@ -13,7 +13,6 @@ import android.text.method.DigitsKeyListener
 import android.util.AttributeSet
 import android.util.SparseArray
 import androidx.annotation.DrawableRes
-import androidx.annotation.IntRange
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import androidx.core.widget.TextViewCompat
@@ -22,9 +21,9 @@ import java.util.regex.Pattern
 import kotlin.math.ceil
 
 class EditCredit @JvmOverloads constructor(
-        context: Context,
-        attrs: AttributeSet? = null,
-        defStyleAttr: Int = androidx.appcompat.R.attr.editTextStyle
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = androidx.appcompat.R.attr.editTextStyle
 ) : AppCompatEditText(context, attrs, defStyleAttr) {
 
     private var mCCPatterns = SparseArray<Pattern>()
@@ -61,12 +60,17 @@ class EditCredit @JvmOverloads constructor(
         START, END, LEFT, RIGHT
     }
 
-    enum class Card(internal val value: Int, @field:DrawableRes internal val drawableRes: Int) {
-        VISA(1, R.drawable.visa),
-        MASTERCARD(2, R.drawable.mastercard),
-        AMEX(4, R.drawable.amex),
-        DISCOVER(8, R.drawable.discover),
-        UNKNOWN(-1, R.drawable.creditcard);
+    enum class Card(
+        internal val value: Int,
+        @field:DrawableRes internal val drawableRes: Int,
+        internal val regex: Regex
+    ) {
+        VISA(1, R.drawable.visa, Regex("^4[0-9]{1,12}(?:[0-9]{6})?$")),
+        MASTERCARD(2, R.drawable.mastercard, Regex("^5[1-5][0-9]{0,14}$")),
+        AMEX(4, R.drawable.amex, Regex("^3[47][0-9]{0,13}$")),
+        DISCOVER(8, R.drawable.discover, Regex("^6(?:011|5[0-9]{1,2})[0-9]{0,12}$")),
+        DINERS(16, R.drawable.diners, Regex("^3(?:0[0-5]|[68][0-9])[0-9]{0,11}\$")),
+        UNKNOWN(-1, R.drawable.creditcard, Regex(".*"));
 
         companion object {
             internal fun from(@DrawableRes drawableRes: Int): Card {
@@ -85,7 +89,12 @@ class EditCredit @JvmOverloads constructor(
 
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
-        override fun onTextChanged(text: CharSequence, start: Int, lengthBefore: Int, lengthAfter: Int) {
+        override fun onTextChanged(
+            text: CharSequence,
+            start: Int,
+            lengthBefore: Int,
+            lengthAfter: Int
+        ) {
             val textWithoutSeparator = textWithoutSeparator
 
             var mDrawableResId = 0
@@ -122,13 +131,24 @@ class EditCredit @JvmOverloads constructor(
 
     private fun applyAttributes(attrs: AttributeSet) {
         val a = context.theme.obtainStyledAttributes(
-                attrs,
-                R.styleable.EditCredit,
-                0, 0)
+            attrs,
+            R.styleable.EditCredit,
+            0, 0
+        )
         try {
-            setSeparator(Separator.values()[a.getInt(R.styleable.EditCredit_separator, Separator.NONE.ordinal)])
+            setSeparator(
+                Separator.values()[a.getInt(
+                    R.styleable.EditCredit_separator,
+                    Separator.NONE.ordinal
+                )]
+            )
             setDisabledCardsInternal(a.getInt(R.styleable.EditCredit_disabledCards, 0))
-            setDrawableGravity(Gravity.values()[a.getInt(R.styleable.EditCredit_drawableGravity, Gravity.END.ordinal)])
+            setDrawableGravity(
+                Gravity.values()[a.getInt(
+                    R.styleable.EditCredit_drawableGravity,
+                    Gravity.END.ordinal
+                )]
+            )
         } finally {
             a.recycle()
         }
@@ -187,17 +207,6 @@ class EditCredit @JvmOverloads constructor(
         return result
     }
 
-    @Deprecated("Please use the method that accepts a Separator enum instead.", ReplaceWith("this.setSeparator(Separator.)"))
-    fun setSeparator(@IntRange(from = 0, to = 2) separator: Int) {
-        require(!(separator > 2 || separator < 0)) {
-            "The separator has to be one of the following:" +
-                    "NO_SEPARATOR." +
-                    "SPACES_SEPARATOR." +
-                    "DASHES_SEPARATOR."
-        }
-        setSeparator(Separator.values()[separator])
-    }
-
     /**
      * Use this method to set the separator style.
      * The default separator is [Separator.NONE].
@@ -230,24 +239,12 @@ class EditCredit @JvmOverloads constructor(
 
     private fun setDisabledCardsInternal(disabledCards: Int) {
         val cards = ArrayList<Card>()
-        if (containsFlag(disabledCards, Card.VISA.value)) {
-            cards.add(Card.VISA)
-        }
-        if (containsFlag(disabledCards, Card.MASTERCARD.value)) {
-            cards.add(Card.MASTERCARD)
-        }
-        if (containsFlag(disabledCards, Card.AMEX.value)) {
-            cards.add(Card.AMEX)
-        }
-        if (containsFlag(disabledCards, Card.DISCOVER.value)) {
-            cards.add(Card.DISCOVER)
+        for (card in Card.values()) {
+            if (containsFlag(disabledCards, card.value)) {
+                cards.add(card)
+            }
         }
         setDisabledCards(*cards.toTypedArray())
-    }
-
-    @Deprecated("Please use the method that accepts an array of Cards instead.", ReplaceWith("this.setDisabledCards(cards)"))
-    fun setDisabledCards(disabledCards: Int) {
-        setDisabledCardsInternal(disabledCards)
     }
 
     /**
@@ -257,22 +254,10 @@ class EditCredit @JvmOverloads constructor(
      * @param cards the cards to be disabled.
      */
     fun setDisabledCards(vararg cards: Card) {
-        var disabledCards = 0
-        for (card in cards) {
-            disabledCards = disabledCards or card.value
-        }
         mCCPatterns.clear()
-        if (!containsFlag(disabledCards, Card.VISA.value)) {
-            mCCPatterns.put(Card.VISA.drawableRes, Pattern.compile("^4[0-9]{1,12}(?:[0-9]{6})?$"))
-        }
-        if (!containsFlag(disabledCards, Card.MASTERCARD.value)) {
-            mCCPatterns.put(Card.MASTERCARD.drawableRes, Pattern.compile("^5[1-5][0-9]{0,14}$"))
-        }
-        if (!containsFlag(disabledCards, Card.AMEX.value)) {
-            mCCPatterns.put(Card.AMEX.drawableRes, Pattern.compile("^3[47][0-9]{0,13}$"))
-        }
-        if (!containsFlag(disabledCards, Card.DISCOVER.value)) {
-            mCCPatterns.put(Card.DISCOVER.drawableRes, Pattern.compile("^6(?:011|5[0-9]{1,2})[0-9]{0,12}$"))
+        for (card in Card.values()) {
+            if (card.value == -1 || cards.contains(card)) continue
+            mCCPatterns.put(card.drawableRes, Pattern.compile(card.regex.toString()))
         }
         textWatcher.onTextChanged("", 0, 0, 0)
     }
@@ -296,48 +281,38 @@ class EditCredit @JvmOverloads constructor(
     }
 
     private fun resize(image: Drawable) =
-            when (val height = measuredHeight - (paddingTop + paddingBottom)) {
-                in 1 until image.intrinsicHeight -> {
-                    val bitmap = (image as BitmapDrawable).bitmap
-                    val ratio = image.getIntrinsicWidth().toFloat() / image.intrinsicHeight.toFloat()
-                    val resizedBitmap = Bitmap.createScaledBitmap(bitmap, (height * ratio).toInt(), height, false)
-                    resizedBitmap.density = Bitmap.DENSITY_NONE
-                    BitmapDrawable(resources, resizedBitmap)
-                }
-                in Int.MIN_VALUE..0 -> null
-                else -> image
+        when (val height = measuredHeight - (paddingTop + paddingBottom)) {
+            in 1 until image.intrinsicHeight -> {
+                val bitmap = (image as BitmapDrawable).bitmap
+                val ratio = image.getIntrinsicWidth().toFloat() / image.intrinsicHeight.toFloat()
+                val resizedBitmap =
+                    Bitmap.createScaledBitmap(bitmap, (height * ratio).toInt(), height, false)
+                resizedBitmap.density = Bitmap.DENSITY_NONE
+                BitmapDrawable(resources, resizedBitmap)
             }
+            in Int.MIN_VALUE..0 -> null
+            else -> image
+        }
 
-    private fun setDrawablesRelative(start: Drawable? = null, top: Drawable? = null, end: Drawable? = null, bottom: Drawable? = null) =
-            TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(this, start, top, end, bottom)
+    private fun setDrawablesRelative(
+        start: Drawable? = null,
+        top: Drawable? = null,
+        end: Drawable? = null,
+        bottom: Drawable? = null
+    ) =
+        TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(
+            this,
+            start,
+            top,
+            end,
+            bottom
+        )
 
-    private fun setDrawables(left: Drawable? = null, top: Drawable? = null, right: Drawable? = null, bottom: Drawable? = null) =
-            setCompoundDrawablesWithIntrinsicBounds(left, top, right, bottom)
-
-    @Suppress("unused")
-    companion object {
-        @Deprecated("This constant has been replace with an enum.", ReplaceWith("Separator.NONE"))
-        const val NO_SEPARATOR = 0
-
-        @Deprecated("This constant has been replace with an enum.", ReplaceWith("Separator.SPACES"))
-        const val SPACES_SEPARATOR = 1
-
-        @Deprecated("This constant has been replace with an enum.", ReplaceWith("Separator.DASHES"))
-        const val DASHES_SEPARATOR = 2
-
-        @Deprecated("This constant has been replace with an enum.", ReplaceWith("null"))
-        const val NONE = 0
-
-        @Deprecated("This constant has been replace with an enum.", ReplaceWith("Card.VISA"))
-        const val VISA = 1
-
-        @Deprecated("This constant has been replace with an enum.", ReplaceWith("Card.MASTERCARD"))
-        const val MASTERCARD = 2
-
-        @Deprecated("This constant has been replace with an enum.", ReplaceWith("Card.AMEX"))
-        const val AMEX = 4
-
-        @Deprecated("This constant has been replace with an enum.", ReplaceWith("Card.DISCOVER"))
-        const val DISCOVER = 8
-    }
+    private fun setDrawables(
+        left: Drawable? = null,
+        top: Drawable? = null,
+        right: Drawable? = null,
+        bottom: Drawable? = null
+    ) =
+        setCompoundDrawablesWithIntrinsicBounds(left, top, right, bottom)
 }

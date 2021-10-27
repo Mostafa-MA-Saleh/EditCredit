@@ -12,6 +12,7 @@
             <flag name="mastercard" value="2" />
             <flag name="amex" value="4" />
             <flag name="discover" value="8" />
+            <flag name="diners" value="16" />
         </attr>
         <attr name="drawableGravity">
             <enum name="start" value="0" />

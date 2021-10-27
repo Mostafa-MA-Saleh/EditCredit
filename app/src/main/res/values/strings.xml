@@ -12,6 +12,7 @@
     <string name="mastercard">MasterCard</string>
     <string name="american_express">American Express</string>
     <string name="discover">Discover</string>
+    <string name="diners_club_international">Diners Club International</string>
     <string name="unknown">Unknown</string>
     <string name="gravity_label">Gravity:</string>
     <string name="start">Start</string>
