@@ -1,7 +1,7 @@
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-EditCredit-green.svg?style=flat)](https://android-arsenal.com/details/1/6952)
 [![JitPack](https://img.shields.io/badge/JitPack-2.2.0-blue.svg?style=flat)](https://jitpack.io/#Mostafa-MA-Saleh/EditCredit/2.2.0)
 [![Playstore](https://img.shields.io/badge/Playstore-Demo-brightgreen.svg?style=flat)](https://play.google.com/store/apps/details?id=saleh.ma.mostafa.gmail.com.editcreditdemo)
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/MostafaS92)
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/MostafaSaid92)
 
 <br/>
 
@@ -114,7 +114,7 @@ EditCredit can be used just like a normal EditText
 
 If this project helps you, and you wanna buy me a cup of coffee.
 
-[![PayPal](https://cdn.rawgit.com/twolfson/paypal-github-button/1.0.0/dist/button.svg)](https://paypal.me/MostafaS92)
+[![PayPal](https://cdn.rawgit.com/twolfson/paypal-github-button/1.0.0/dist/button.svg)](https://paypal.me/MostafaSaid92)
 
 ## License
 ```
