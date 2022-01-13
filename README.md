@@ -1,5 +1,5 @@
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-EditCredit-green.svg?style=flat)](https://android-arsenal.com/details/1/6952)
-[![JitPack](https://img.shields.io/badge/JitPack-3.0.0-blue.svg?style=flat)](https://jitpack.io/#Mostafa-MA-Saleh/EditCredit/3.0.0)
+[![JitPack](https://img.shields.io/badge/JitPack-3.0.1-blue.svg?style=flat)](https://jitpack.io/#Mostafa-MA-Saleh/EditCredit/3.0.1)
 [![Playstore](https://img.shields.io/badge/Playstore-Demo-brightgreen.svg?style=flat)](https://play.google.com/store/apps/details?id=saleh.ma.mostafa.gmail.com.editcreditdemo)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate/?hosted_button_id=9RTEPXAVC99RW)
 
@@ -28,11 +28,13 @@ allprojects {
 ```gradle
 dependencies {
   ...
-  implementation 'com.github.Mostafa-MA-Saleh:EditCredit:3.0.0'
+  implementation 'com.github.Mostafa-MA-Saleh:EditCredit:3.0.1'
 }
 ```
 
 ## Changelog
+### v 3.0.1
+- Fixed a issue with caret sometimes moving to where it shouldn't.
 ### v 3.0.0
 - Updated the library to more follow kotlin conventions.
 - Replaced some methods with kotlin standard equivalents.

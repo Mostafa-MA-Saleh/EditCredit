@@ -28,7 +28,7 @@ class EditCredit @JvmOverloads constructor(
     private var mCCPatterns = SparseArray<Pattern>()
     private var isValidCard: Boolean = false
     private var mCurrentDrawableResId = Card.UNKNOWN.drawableRes
-    private val maxLength = 19
+    private val maxLength = 16
 
     /**
      * This property sets the location of the card drawable.
@@ -44,10 +44,13 @@ class EditCredit @JvmOverloads constructor(
      */
     var separator: Separator by Delegates.observable(Separator.NONE) { _, oldValue, newValue ->
         filters =
-            arrayOf<InputFilter>(InputFilter.LengthFilter(maxLength + (newValue.length * (maxLength % 4))))
+            arrayOf<InputFilter>(InputFilter.LengthFilter(maxLength + (newValue.length * (maxLength / 4))))
         keyListener = DigitsKeyListener.getInstance("0123456789$newValue")
         val textWithoutSeparator = text.toString().replace(oldValue.toRegex(), "")
-        val caretPosition = selectionEnd
+        val caretPosition = selectionStart + when (newValue == oldValue) {
+            false -> (newValue.length * (selectionStart / 4))
+            true -> if ((selectionStart - (selectionStart / 4)) % 4 == 0) 1 else 0
+        }
         updateText(
             textWithoutSeparator.chunked(4)
                 .joinToString("") { "$it$newValue" }
