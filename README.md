@@ -5,7 +5,7 @@
 
 <br/>
 
-![Edit Credit Logo](logo/logo_ldpi.png)
+<p align="center"><img src="logo/logo_ldpi.png" alt="Logo" /></p>
 
 Custom EditText for entering Credit Card numbers, this EditText will also 
 display the image of the card number type being entered (after entering the second digit).
