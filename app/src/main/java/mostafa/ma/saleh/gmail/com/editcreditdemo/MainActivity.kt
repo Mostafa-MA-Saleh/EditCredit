@@ -40,24 +40,22 @@ class MainActivity : AppCompatActivity(), RadioGroup.OnCheckedChangeListener,
         }
     }
 
-    private fun onSeparatorsCheckedChanged(@IdRes checkedId: Int) =
-        binding.editCredit.setSeparator(
-            when (checkedId) {
-                R.id.spacesRadioButton -> EditCredit.Separator.SPACES
-                R.id.dashesRadioButton -> EditCredit.Separator.DASHES
-                else -> EditCredit.Separator.NONE
-            }
-        )
+    private fun onSeparatorsCheckedChanged(@IdRes checkedId: Int) {
+        binding.editCredit.separator = when (checkedId) {
+            R.id.spacesRadioButton -> EditCredit.Separator.SPACES
+            R.id.dashesRadioButton -> EditCredit.Separator.DASHES
+            else -> EditCredit.Separator.NONE
+        }
+    }
 
-    private fun onGravityCheckedChanged(@IdRes checkedId: Int) =
-        binding.editCredit.setDrawableGravity(
-            when (checkedId) {
-                R.id.startRadioButton -> EditCredit.Gravity.START
-                R.id.leftRadioButton -> EditCredit.Gravity.LEFT
-                R.id.rightRadioButton -> EditCredit.Gravity.RIGHT
-                else -> EditCredit.Gravity.END
-            }
-        )
+    private fun onGravityCheckedChanged(@IdRes checkedId: Int) {
+        binding.editCredit.drawableGravity = when (checkedId) {
+            R.id.startRadioButton -> EditCredit.Gravity.START
+            R.id.leftRadioButton -> EditCredit.Gravity.LEFT
+            R.id.rightRadioButton -> EditCredit.Gravity.RIGHT
+            else -> EditCredit.Gravity.END
+        }
+    }
 
     override fun onCheckedChanged(buttonView: CompoundButton, isChecked: Boolean) {
         val disabledCards = mutableListOf<EditCredit.Card>()

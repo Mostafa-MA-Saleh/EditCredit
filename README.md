@@ -1,5 +1,5 @@
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-EditCredit-green.svg?style=flat)](https://android-arsenal.com/details/1/6952)
-[![JitPack](https://img.shields.io/badge/JitPack-2.2.0-blue.svg?style=flat)](https://jitpack.io/#Mostafa-MA-Saleh/EditCredit/2.2.0)
+[![JitPack](https://img.shields.io/badge/JitPack-3.0.0-blue.svg?style=flat)](https://jitpack.io/#Mostafa-MA-Saleh/EditCredit/3.0.0)
 [![Playstore](https://img.shields.io/badge/Playstore-Demo-brightgreen.svg?style=flat)](https://play.google.com/store/apps/details?id=saleh.ma.mostafa.gmail.com.editcreditdemo)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate/?hosted_button_id=9RTEPXAVC99RW)
 
@@ -28,11 +28,17 @@ allprojects {
 ```gradle
 dependencies {
   ...
-  implementation 'com.github.Mostafa-MA-Saleh:EditCredit:2.2.0'
+  implementation 'com.github.Mostafa-MA-Saleh:EditCredit:3.0.0'
 }
 ```
 
 ## Changelog
+### v 3.0.0
+- Updated the library to more follow kotlin conventions.
+- Replaced some methods with kotlin standard equivalents.
+- Fixed an issue wherein trying to change the separator style during runtime would sometimes crash the app.
+- Added a Java example activity.
+- Cleaned up the code a bit.
 ### v 2.2.0
 - Added support for Diners Club cards.
 - Removed the deprecated methods and constants.
@@ -76,17 +82,11 @@ dependencies {
 ### v 1.0
 - Initial Version.
 
-## Summary
+## Usage
 
-### XML attributes
+### Java
 
-| Name | Description | values |
-|:---|:---|:---|
-| separator | Sets the separator style | no_separator<br/>spaces<br/>dashes |
-| drawableGravity | Sets the the location of the card drawable | start<br/>end<br/>left<br/>right |
-| disabledCards | Sets disabled cards<br/>this can be multiple values seperated by "\|"<br/>(eg. app:disabledCards="visa\|amex") | none<br/>visa<br/>mastercard<br/>amex<br/>discover<br/>diners |
-
-### Public Methods
+#### Public Methods
 
 | return | Name/Description |
 |:---|:---|
@@ -94,11 +94,40 @@ dependencies {
 | String | getTextWithoutSeparator()<br/>Returns the card number without the separators. |
 | boolean | isCardValid()<br/>Validates the entered card number. |
 | void | setSeparator(Separator)<br/>Sets the separator style. |
+| Separator | getSeparator()<br/>Returns the current separator style. |
 | void | setDisabledCards(Card...)<br/>Sets the disabled cards. |
 | void | setDrawableGravity(Gravity)<br/>Sets the location of the card drawable. |
+| Gravity | getDrawableGravity()<br/>Returns the current location of the card drawable. |
 
+### Kotlin
 
-## Usage
+#### Public Methods
+
+| return | Name/Description |
+|:---|:---|
+| void | setDisabledCards(Card...)<br/>Sets the disabled cards. |
+
+#### Public Attributes
+
+| Type | Name/Description |Read Only|
+|:---|:---|:--:|
+| Card | cardType<br/>The current card type. | * |
+| String | textWithoutSeparator<br/>The card number without the separators. | * |
+| Boolean | isCardValid<br/>Validates the entered card number. | * |
+| Separator | separator<br/>The current separator style. | |
+| Gravity | drawableGravity<br/>The location of the card drawable. | |
+
+### XML
+
+#### Attributes
+
+| Name | Description | values |
+|:---|:---|:---|
+| separator | Sets the separator style | no_separator<br/>spaces<br/>dashes |
+| drawableGravity | Sets the the location of the card drawable | start<br/>end<br/>left<br/>right |
+| disabledCards | Sets disabled cards<br/>this can be multiple values seperated by "\|"<br/>(eg. app:disabledCards="visa\|amex") | none<br/>visa<br/>mastercard<br/>amex<br/>discover<br/>diners |
+
+#### Example
 
 EditCredit can be used just like a normal EditText
 ```xml

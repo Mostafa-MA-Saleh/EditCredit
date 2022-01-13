@@ -16,9 +16,8 @@ import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import androidx.core.widget.TextViewCompat
-import java.util.*
 import java.util.regex.Pattern
-import kotlin.math.ceil
+import kotlin.properties.Delegates
 
 class EditCredit @JvmOverloads constructor(
     context: Context,
@@ -27,16 +26,41 @@ class EditCredit @JvmOverloads constructor(
 ) : AppCompatEditText(context, attrs, defStyleAttr) {
 
     private var mCCPatterns = SparseArray<Pattern>()
-    private var mSeparator: Separator = Separator.NONE
-    private var mDrawableGravity: Gravity = Gravity.END
     private var isValidCard: Boolean = false
     private var mCurrentDrawableResId = Card.UNKNOWN.drawableRes
+    private val maxLength = 19
+
+    /**
+     * This property sets the location of the card drawable.
+     * The default gravity is [Gravity.END].
+     */
+    var drawableGravity: Gravity by Delegates.observable(Gravity.END) { _, _, _ ->
+        addDrawable()
+    }
+
+    /**
+     * This property sets the separator style.
+     * The default separator is [Separator.NONE].
+     */
+    var separator: Separator by Delegates.observable(Separator.NONE) { _, oldValue, newValue ->
+        filters =
+            arrayOf<InputFilter>(InputFilter.LengthFilter(maxLength + (newValue.length * (maxLength % 4))))
+        keyListener = DigitsKeyListener.getInstance("0123456789$newValue")
+        val textWithoutSeparator = text.toString().replace(oldValue.toRegex(), "")
+        val caretPosition = selectionEnd
+        updateText(
+            textWithoutSeparator.chunked(4)
+                .joinToString("") { "$it$newValue" }
+                .removeSuffix("$newValue")
+        )
+        if (caretPosition < text?.length ?: 0)
+            setSelection(caretPosition)
+    }
 
     val textWithoutSeparator
-        get() = if (mSeparator == Separator.NONE) {
-            text.toString()
-        } else {
-            text.toString().replace(mSeparator.toRegex(), "")
+        get() = when (separator) {
+            Separator.NONE -> text.toString()
+            else -> text.toString().replace(separator.toRegex(), "")
         }
 
     val isCardValid: Boolean
@@ -73,14 +97,8 @@ class EditCredit @JvmOverloads constructor(
         UNKNOWN(-1, R.drawable.creditcard, Regex(".*"));
 
         companion object {
-            internal fun from(@DrawableRes drawableRes: Int): Card {
-                for (card in values()) {
-                    if (card.drawableRes == drawableRes) {
-                        return card
-                    }
-                }
-                return UNKNOWN
-            }
+            internal fun from(@DrawableRes drawableRes: Int) =
+                values().find { it.drawableRes == drawableRes } ?: UNKNOWN
         }
     }
 
@@ -95,8 +113,6 @@ class EditCredit @JvmOverloads constructor(
             lengthBefore: Int,
             lengthAfter: Int
         ) {
-            val textWithoutSeparator = textWithoutSeparator
-
             var mDrawableResId = 0
             for (i in 0 until mCCPatterns.size()) {
                 val key = mCCPatterns.keyAt(i)
@@ -116,15 +132,15 @@ class EditCredit @JvmOverloads constructor(
                 mCurrentDrawableResId = Card.UNKNOWN.drawableRes
             }
             addDrawable()
-            addSeparators()
+            separator = separator
         }
     }
 
     init {
-        setDisabledCards()
+        enableAllCards()
         inputType = InputType.TYPE_CLASS_PHONE
-        setSeparator(Separator.NONE)
-        setDrawableGravity(Gravity.END)
+        separator = Separator.NONE
+        drawableGravity = Gravity.END
         attrs?.let { applyAttributes(it) }
         addTextChangedListener(textWatcher)
     }
@@ -136,115 +152,46 @@ class EditCredit @JvmOverloads constructor(
             0, 0
         )
         try {
-            setSeparator(
-                Separator.values()[a.getInt(
-                    R.styleable.EditCredit_separator,
-                    Separator.NONE.ordinal
-                )]
+            separator = Separator.values()[a.getInt(
+                R.styleable.EditCredit_separator,
+                Separator.NONE.ordinal
+            )]
+            setDisabledCards(
+                *Card.values().filter {
+                    containsFlag(
+                        a.getInt(R.styleable.EditCredit_disabledCards, 0),
+                        it.value
+                    )
+                }.toTypedArray()
             )
-            setDisabledCardsInternal(a.getInt(R.styleable.EditCredit_disabledCards, 0))
-            setDrawableGravity(
-                Gravity.values()[a.getInt(
-                    R.styleable.EditCredit_drawableGravity,
-                    Gravity.END.ordinal
-                )]
-            )
+            drawableGravity = Gravity.values()[a.getInt(
+                R.styleable.EditCredit_drawableGravity,
+                Gravity.END.ordinal
+            )]
         } finally {
             a.recycle()
         }
     }
 
     private fun addDrawable() {
-        var currentDrawable = ContextCompat.getDrawable(context, mCurrentDrawableResId)
-        if (currentDrawable != null && error.isNullOrEmpty()) {
-            currentDrawable = resize(currentDrawable)
-            when (mDrawableGravity) {
-                Gravity.START -> setDrawablesRelative(start = currentDrawable)
-                Gravity.RIGHT -> setDrawables(right = currentDrawable)
-                Gravity.LEFT -> setDrawables(left = currentDrawable)
-                else -> setDrawablesRelative(end = currentDrawable)
-            }
-        }
-    }
-
-    private fun addSeparators() {
-        val text = text.toString()
-        if (mSeparator != Separator.NONE) {
-            if (text.length > 4 && !text.matches("(?:[0-9]{4}$mSeparator)+[0-9]{1,4}".toRegex())) {
-                val sp = StringBuilder()
-                val caretPosition = selectionEnd
-                val segments = splitString(text.replace(mSeparator.toRegex(), ""))
-                for (segment in segments) {
-                    sp.append(segment).append(mSeparator)
+        ContextCompat.getDrawable(context, mCurrentDrawableResId)
+            ?.takeIf { error.isNullOrEmpty() }
+            ?.resize()
+            ?.let {
+                when (drawableGravity) {
+                    Gravity.START -> setDrawablesRelative(start = it)
+                    Gravity.RIGHT -> setDrawables(right = it)
+                    Gravity.LEFT -> setDrawables(left = it)
+                    else -> setDrawablesRelative(end = it)
                 }
-                setText("")
-                append(sp.delete(sp.length - mSeparator.length, sp.length).toString())
-                if (caretPosition < text.length)
-                    setSelection(caretPosition)
             }
-        }
     }
 
-    private fun removeSeparators() {
-        var text = text.toString()
-        text = text.replace(" ".toRegex(), "").replace("-".toRegex(), "")
+    private fun updateText(newText: String) {
+        removeTextChangedListener(textWatcher)
         setText("")
-        append(text)
-    }
-
-    private fun splitString(s: String): Array<String?> {
-        val arrayLength = ceil(s.length / 4.toDouble()).toInt()
-        val result = arrayOfNulls<String>(arrayLength)
-
-        var j = 0
-        val lastIndex = result.size - 1
-        for (i in 0 until lastIndex) {
-            result[i] = s.substring(j, j + 4)
-            j += 4
-        }
-        result[lastIndex] = s.substring(j)
-
-        return result
-    }
-
-    /**
-     * Use this method to set the separator style.
-     * The default separator is [Separator.NONE].
-     *
-     * @param separator the style of the separator.
-     */
-    fun setSeparator(separator: Separator) {
-        mSeparator = separator
-        if (mSeparator != Separator.NONE) {
-            filters = arrayOf<InputFilter>(InputFilter.LengthFilter(23))
-            keyListener = DigitsKeyListener.getInstance("0123456789$mSeparator")
-            addSeparators()
-        } else {
-            filters = arrayOf<InputFilter>(InputFilter.LengthFilter(19))
-            keyListener = DigitsKeyListener.getInstance("0123456789")
-            removeSeparators()
-        }
-    }
-
-    /**
-     * Use this method to set the location of the card drawable.
-     * The default gravity is [Gravity.END].
-     *
-     * @param gravity the drawable location.
-     */
-    fun setDrawableGravity(gravity: Gravity) {
-        mDrawableGravity = gravity
-        addDrawable()
-    }
-
-    private fun setDisabledCardsInternal(disabledCards: Int) {
-        val cards = ArrayList<Card>()
-        for (card in Card.values()) {
-            if (containsFlag(disabledCards, card.value)) {
-                cards.add(card)
-            }
-        }
-        setDisabledCards(*cards.toTypedArray())
+        append(newText)
+        addTextChangedListener(textWatcher)
     }
 
     /**
@@ -262,36 +209,35 @@ class EditCredit @JvmOverloads constructor(
         textWatcher.onTextChanged("", 0, 0, 0)
     }
 
+    /**
+     * Use this method to enable all supported cards.
+     *
+     */
+    fun enableAllCards() = setDisabledCards()
+
     private fun containsFlag(flagSet: Int, flag: Int): Boolean {
         return flagSet or flag == flagSet
     }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        var noDrawablesVisible = true
-        for (drawable in compoundDrawables) {
-            if (drawable != null) {
-                noDrawablesVisible = false
-                break
-            }
-        }
-        if (noDrawablesVisible) {
+        if (compoundDrawables.all { it == null }) {
             addDrawable()
         }
     }
 
-    private fun resize(image: Drawable) =
+    private fun Drawable.resize() =
         when (val height = measuredHeight - (paddingTop + paddingBottom)) {
-            in 1 until image.intrinsicHeight -> {
-                val bitmap = (image as BitmapDrawable).bitmap
-                val ratio = image.getIntrinsicWidth().toFloat() / image.intrinsicHeight.toFloat()
+            in 1 until intrinsicHeight -> {
+                val bitmap = (this as BitmapDrawable).bitmap
+                val ratio = getIntrinsicWidth().toFloat() / intrinsicHeight.toFloat()
                 val resizedBitmap =
                     Bitmap.createScaledBitmap(bitmap, (height * ratio).toInt(), height, false)
                 resizedBitmap.density = Bitmap.DENSITY_NONE
                 BitmapDrawable(resources, resizedBitmap)
             }
             in Int.MIN_VALUE..0 -> null
-            else -> image
+            else -> this
         }
 
     private fun setDrawablesRelative(
@@ -299,20 +245,18 @@ class EditCredit @JvmOverloads constructor(
         top: Drawable? = null,
         end: Drawable? = null,
         bottom: Drawable? = null
-    ) =
-        TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(
-            this,
-            start,
-            top,
-            end,
-            bottom
-        )
+    ) = TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(
+        this,
+        start,
+        top,
+        end,
+        bottom
+    )
 
     private fun setDrawables(
         left: Drawable? = null,
         top: Drawable? = null,
         right: Drawable? = null,
         bottom: Drawable? = null
-    ) =
-        setCompoundDrawablesWithIntrinsicBounds(left, top, right, bottom)
+    ) = setCompoundDrawablesWithIntrinsicBounds(left, top, right, bottom)
 }
