@@ -145,7 +145,6 @@
             android:id="@+id/validateButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="onClick"
             android:text="@string/validate_card_number"
             android:textAllCaps="false" />
 
@@ -153,7 +152,6 @@
             android:id="@+id/getNumberButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="onClick"
             android:text="@string/get_number_without_separators"
             android:textAllCaps="false" />
 
@@ -161,7 +159,6 @@
             android:id="@+id/getTypeButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="onClick"
             android:text="@string/get_type"
             android:textAllCaps="false" />
 

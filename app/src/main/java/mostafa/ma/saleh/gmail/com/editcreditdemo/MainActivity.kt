@@ -11,8 +11,10 @@ import androidx.appcompat.app.AppCompatActivity
 import mostafa.ma.saleh.gmail.com.editcredit.EditCredit
 import mostafa.ma.saleh.gmail.com.editcreditdemo.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(), RadioGroup.OnCheckedChangeListener,
-    CompoundButton.OnCheckedChangeListener {
+class MainActivity : AppCompatActivity(),
+    RadioGroup.OnCheckedChangeListener,
+    CompoundButton.OnCheckedChangeListener,
+    View.OnClickListener {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -31,6 +33,9 @@ class MainActivity : AppCompatActivity(), RadioGroup.OnCheckedChangeListener,
         binding.americanExpressCheckBox.setOnCheckedChangeListener(this)
         binding.discoverCheckBox.setOnCheckedChangeListener(this)
         binding.dinersCheckBox.setOnCheckedChangeListener(this)
+        binding.validateButton.setOnClickListener(this)
+        binding.getNumberButton.setOnClickListener(this)
+        binding.getTypeButton.setOnClickListener(this)
     }
 
     override fun onCheckedChanged(group: RadioGroup, @IdRes checkedId: Int) {
@@ -77,7 +82,7 @@ class MainActivity : AppCompatActivity(), RadioGroup.OnCheckedChangeListener,
         binding.editCredit.setDisabledCards(*disabledCards.toTypedArray())
     }
 
-    fun onClick(view: View) {
+    override fun onClick(view: View) {
         val message = when (view.id) {
             R.id.validateButton -> if (binding.editCredit.isCardValid) "Valid" else "Not Valid"
             R.id.getNumberButton -> binding.editCredit.textWithoutSeparator

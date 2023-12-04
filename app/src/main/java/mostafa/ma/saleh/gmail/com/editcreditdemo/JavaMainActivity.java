@@ -17,7 +17,11 @@ import java.util.ArrayList;
 import mostafa.ma.saleh.gmail.com.editcredit.EditCredit;
 import mostafa.ma.saleh.gmail.com.editcreditdemo.databinding.ActivityMainBinding;
 
-public class JavaMainActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, CompoundButton.OnCheckedChangeListener {
+public class JavaMainActivity
+        extends AppCompatActivity
+        implements RadioGroup.OnCheckedChangeListener,
+        CompoundButton.OnCheckedChangeListener,
+        View.OnClickListener {
 
     private ActivityMainBinding binding;
 
@@ -37,6 +41,9 @@ public class JavaMainActivity extends AppCompatActivity implements RadioGroup.On
         binding.americanExpressCheckBox.setOnCheckedChangeListener(this);
         binding.discoverCheckBox.setOnCheckedChangeListener(this);
         binding.dinersCheckBox.setOnCheckedChangeListener(this);
+        binding.validateButton.setOnClickListener(this);
+        binding.getNumberButton.setOnClickListener(this);
+        binding.getTypeButton.setOnClickListener(this);
     }
 
     @Override
@@ -112,19 +119,13 @@ public class JavaMainActivity extends AppCompatActivity implements RadioGroup.On
     }
 
     private String getCardTypeString(@NonNull EditCredit.Card card) {
-        switch (card) {
-            case VISA:
-                return getString(R.string.visa);
-            case MASTERCARD:
-                return getString(R.string.mastercard);
-            case AMEX:
-                return getString(R.string.american_express);
-            case DISCOVER:
-                return getString(R.string.discover);
-            case DINERS:
-                return getString(R.string.diners_club_international);
-            default:
-                return getString(R.string.unknown);
-        }
+        return switch (card) {
+            case VISA -> getString(R.string.visa);
+            case MASTERCARD -> getString(R.string.mastercard);
+            case AMEX -> getString(R.string.american_express);
+            case DISCOVER -> getString(R.string.discover);
+            case DINERS -> getString(R.string.diners_club_international);
+            default -> getString(R.string.unknown);
+        };
     }
 }

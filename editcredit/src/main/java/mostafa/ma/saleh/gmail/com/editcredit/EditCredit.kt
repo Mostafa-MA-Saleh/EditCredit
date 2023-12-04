@@ -56,7 +56,7 @@ class EditCredit @JvmOverloads constructor(
                 .joinToString("") { "$it$newValue" }
                 .removeSuffix("$newValue")
         )
-        if (caretPosition < text?.length ?: 0)
+        if (caretPosition < (text?.length ?: 0))
             setSelection(caretPosition)
     }
 
@@ -101,7 +101,7 @@ class EditCredit @JvmOverloads constructor(
 
         companion object {
             internal fun from(@DrawableRes drawableRes: Int) =
-                values().find { it.drawableRes == drawableRes } ?: UNKNOWN
+                entries.find { it.drawableRes == drawableRes } ?: UNKNOWN
         }
     }
 
@@ -155,19 +155,19 @@ class EditCredit @JvmOverloads constructor(
             0, 0
         )
         try {
-            separator = Separator.values()[a.getInt(
+            separator = Separator.entries[a.getInt(
                 R.styleable.EditCredit_separator,
                 Separator.NONE.ordinal
             )]
             setDisabledCards(
-                *Card.values().filter {
+                *Card.entries.filter {
                     containsFlag(
                         a.getInt(R.styleable.EditCredit_disabledCards, 0),
                         it.value
                     )
                 }.toTypedArray()
             )
-            drawableGravity = Gravity.values()[a.getInt(
+            drawableGravity = Gravity.entries[a.getInt(
                 R.styleable.EditCredit_drawableGravity,
                 Gravity.END.ordinal
             )]
@@ -205,7 +205,7 @@ class EditCredit @JvmOverloads constructor(
      */
     fun setDisabledCards(vararg cards: Card) {
         mCCPatterns.clear()
-        for (card in Card.values()) {
+        for (card in Card.entries) {
             if (card.value == -1 || cards.contains(card)) continue
             mCCPatterns.put(card.drawableRes, Pattern.compile(card.regex.toString()))
         }
@@ -216,6 +216,7 @@ class EditCredit @JvmOverloads constructor(
      * Use this method to enable all supported cards.
      *
      */
+    @Suppress("MemberVisibilityCanBePrivate")
     fun enableAllCards() = setDisabledCards()
 
     private fun containsFlag(flagSet: Int, flag: Int): Boolean {

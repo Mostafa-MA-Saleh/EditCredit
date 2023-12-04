@@ -4,7 +4,13 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/EditCredit.iml" filepath="$PROJECT_DIR$/.idea/modules/EditCredit.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/EditCredit.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/EditCredit.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/EditCredit.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/EditCredit.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/EditCredit.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/EditCredit.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/EditCredit.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/EditCredit.app.unitTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/editcredit/EditCredit.editcredit.iml" filepath="$PROJECT_DIR$/.idea/modules/editcredit/EditCredit.editcredit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/editcredit/EditCredit.editcredit.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/editcredit/EditCredit.editcredit.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/editcredit/EditCredit.editcredit.main.iml" filepath="$PROJECT_DIR$/.idea/modules/editcredit/EditCredit.editcredit.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/editcredit/EditCredit.editcredit.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/editcredit/EditCredit.editcredit.unitTest.iml" />
     </modules>
   </component>
 </project>
